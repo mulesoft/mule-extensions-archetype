@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<archetype-descriptor name="mule-extension-archetype" partial="false">
+
+    <requiredProperties>
+        <requiredProperty key="groupId"/>
+        <requiredProperty key="artifactId"/>
+        <requiredProperty key="version">
+            <defaultValue>1.0.0-SNAPSHOT</defaultValue>
+        </requiredProperty>
+        <requiredProperty key="package">
+            <defaultValue>org.mule.extension</defaultValue>
+        </requiredProperty>
+        <requiredProperty key="extensionName">
+            <defaultValue>Basic</defaultValue>
+        </requiredProperty>
+    </requiredProperties>
+
+    <fileSets>
+
+        <fileSet filtered="true" packaged="true" encoding="UTF-8">
+            <directory>src/main/java</directory>
+        </fileSet>
+
+        <fileSet filtered="true">
+            <directory>src/main/resources</directory>
+        </fileSet>
+
+        <fileSet filtered="true" packaged="true" encoding="UTF-8">
+            <directory>src/test/java</directory>
+        </fileSet>
+
+        <fileSet filtered="true">
+            <directory>src/test/resources</directory>
+        </fileSet>
+
+        <fileSet filtered="true" encoding="UTF-8">
+            <directory></directory>
+            <includes>
+                <include>README.md</include>
+            </includes>
+        </fileSet>
+
+    </fileSets>
+</archetype-descriptor>
