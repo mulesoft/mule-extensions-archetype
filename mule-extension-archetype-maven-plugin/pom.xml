@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>mule-extensions-archetype-parent</artifactId>
+        <groupId>org.mule.extensions</groupId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <name>Mule Extensions Generator Maven Plugin</name>
+    <description>A Maven Plugin to generate Mule Extension Projects</description>
+
+    <groupId>org.apache.maven.plugins</groupId>
+    <modelVersion>4.0.0</modelVersion>
+    <packaging>maven-plugin</packaging>
+    <artifactId>extensions-generator-maven-plugin</artifactId>
+
+    <properties>
+        <mavenVersion>2.2.1</mavenVersion>
+        <mavenPluginVersion>3.3</mavenPluginVersion>
+        <mojoExecutorVersion>2.2.0</mojoExecutorVersion>
+        <formatterConfigPath>../formatter.xml</formatterConfigPath>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.maven.plugin-tools</groupId>
+            <artifactId>maven-plugin-annotations</artifactId>
+            <version>${mavenPluginVersion}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-plugin-api</artifactId>
+            <version>${mavenVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.twdata.maven</groupId>
+            <artifactId>mojo-executor</artifactId>
+            <version>${mojoExecutorVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.5</version>
+        </dependency>
+    </dependencies>
+</project>

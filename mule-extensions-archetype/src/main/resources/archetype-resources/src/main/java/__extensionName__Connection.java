@@ -1,5 +1,9 @@
 package ${package};
 
+
+/**
+ * This class represents an extension connection just as example (there is no real connection with anything here c:).
+ */
 public final class ${extensionName}Connection {
 
   private final String id;
@@ -12,7 +16,7 @@ public final class ${extensionName}Connection {
     return id;
   }
 
-  public void stop() {
-    // do something to stop this connection!
+  public void invalidate() {
+    // do something to invalidate this connection!
   }
 }

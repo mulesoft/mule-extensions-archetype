@@ -3,8 +3,12 @@
 <archetype-descriptor name="mule-extension-archetype" partial="false">
 
     <requiredProperties>
-        <requiredProperty key="groupId"/>
-        <requiredProperty key="artifactId"/>
+        <requiredProperty key="groupId">
+            <defaultValue>org.mule.extension</defaultValue>
+        </requiredProperty>
+        <requiredProperty key="artifactId">
+            <defaultValue>mule-basic-extension</defaultValue>
+        </requiredProperty>
         <requiredProperty key="version">
             <defaultValue>1.0.0-SNAPSHOT</defaultValue>
         </requiredProperty>

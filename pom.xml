@@ -6,11 +6,79 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.mule.extensions</groupId>
     <artifactId>mule-extensions-archetype-parent</artifactId>
+    <packaging>pom</packaging>
+
+    <!-- WARNING!!!! -->
+    <!-- When changing this version the static field ARCHETYPE_VERSION of the class
+    `ExtensionArchetypeGeneratorMojo` should ALSO be changed to match this version -->
     <version>1.0.0-SNAPSHOT</version>
+    <!-- WARNING!!! READ ABOVE project.getVersion() won't work since there is no project when the MOJO gets executed -->
+
+    <name>Mule Extensions Archetype Maven Plugin</name>
 
     <modules>
         <module>mule-extensions-archetype</module>
         <module>mule-extensions-archetype-it</module>
+        <module>mule-extension-archetype-maven-plugin</module>
     </modules>
 
+    <properties>
+        <formatterConfigPath>formatter.xml</formatterConfigPath>
+        <formatterGoal>validate</formatterGoal>
+        <jdk.version>1.8</jdk.version>
+        <mavenCompilerVersion>3.1</mavenCompilerVersion>
+        <javaFormatter.plugin.version>1.9.0</javaFormatter.plugin.version>
+    </properties>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${mavenCompilerVersion}</version>
+                    <configuration>
+                        <encoding>ISO-8859-1</encoding>
+                        <fork>true</fork>
+                        <maxmem>512m</maxmem>
+                        <source>${jdk.version}</source>
+                        <target>${jdk.version}</target>
+                        <proc>none</proc>
+                        <!-- Slightly faster builds, see https://jira.codehaus.org/browse/MCOMPILER-209 -->
+                        <useIncrementalCompilation>false</useIncrementalCompilation>
+                        <compilerArgs>
+                            <arg>-parameters</arg>
+                        </compilerArgs>
+                        <testCompilerArgument>-parameters</testCompilerArgument>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>com.marvinformatics.formatter</groupId>
+                    <artifactId>formatter-maven-plugin</artifactId>
+                    <version>${javaFormatter.plugin.version}</version>
+                    <configuration>
+                        <compilerCompliance>${jdk.version}</compilerCompliance>
+                        <compilerSource>${jdk.version}</compilerSource>
+                        <compilerTargetPlatform>${jdk.version}</compilerTargetPlatform>
+                        <configFile>${basedir}/${formatterConfigPath}</configFile>
+                        <configJsFile>${basedir}/${formatterConfigPath}</configJsFile>
+                        <aggregator>false</aggregator>
+                        <executionRoot>true</executionRoot>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>apply-format</id>
+                            <phase>compile</phase>
+                            <goals>
+                                <goal>${formatterGoal}</goal>
+                            </goals>
+                            <configuration>
+                                <skipFormatting>false</skipFormatting>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 </project>

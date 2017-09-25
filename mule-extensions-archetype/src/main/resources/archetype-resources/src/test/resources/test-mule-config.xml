@@ -1,0 +1,19 @@
+<mule xmlns="http://www.mulesoft.org/schema/mule/core"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:${extensionName.toLowerCase()}="http://www.mulesoft.org/schema/mule/${extensionName.toLowerCase()}"
+      xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+          http://www.mulesoft.org/schema/mule/${extensionName.toLowerCase()} http://www.mulesoft.org/schema/mule/${extensionName.toLowerCase()}/current/mule-${extensionName.toLowerCase()}.xsd">
+
+    <${extensionName.toLowerCase()}:config name="${extensionName.toLowerCase()}-config" configId="configId">
+        <${extensionName.toLowerCase()}:connection requiredParameter="aValue" />
+    </${extensionName.toLowerCase()}:config>
+
+    <flow name="sayHiFlow">
+        <${extensionName.toLowerCase()}:say-hi person="Mariano Gonzales"/>
+    </flow>
+
+    <flow name="retrieveInfoFlow">
+        <${extensionName.toLowerCase()}:retrieve-info config-ref="${extensionName.toLowerCase()}-config"/>
+    </flow>
+
+</mule>
