@@ -46,6 +46,11 @@ import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
 
+/**
+ * Maven Plugin to generate a new extension project.
+ *
+ * @since 1.0
+ */
 @Mojo(name = "generate", requiresProject = false)
 public class ExtensionArchetypeGeneratorMojo extends AbstractMojo {
 
@@ -73,6 +78,9 @@ public class ExtensionArchetypeGeneratorMojo extends AbstractMojo {
   @Parameter(property = PACKAGE)
   private String mainPackage;
 
+  /**
+   * Executes the extensions archetype with the gathered information.
+   */
   public void execute() throws MojoExecutionException, MojoFailureException {
     initialise();
     try {

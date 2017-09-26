@@ -7,6 +7,11 @@
 
 package org.mule.extensions.archetype;
 
+/**
+ * A set of constant values used in the mojo, such us property names and some fixed values.
+ *
+ * @since 1.0
+ */
 public class ArchetypeConstants {
 
   public static final String ARCHETYPE_GID_PROP = "archetypeGroupId";

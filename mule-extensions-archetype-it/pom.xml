@@ -10,16 +10,12 @@
     </parent>
 
     <name>Mule Extensions Archetype Integration Tests</name>
-
-    <version>${parent.version}</version>
-    <modelVersion>4.0.0</modelVersion>
     <artifactId>mule-extensions-archetype-it</artifactId>
+    <modelVersion>4.0.0</modelVersion>
 
     <properties>
         <formatterConfigPath>../formatter.xml</formatterConfigPath>
     </properties>
-
-
 
     <dependencies>
         <dependency>
