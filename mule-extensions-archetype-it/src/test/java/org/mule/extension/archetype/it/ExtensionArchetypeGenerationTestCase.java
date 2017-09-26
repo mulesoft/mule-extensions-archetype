@@ -53,35 +53,15 @@ public class ExtensionArchetypeGenerationTestCase {
 
     // Deleting a former created artifact from the archetype to be tested
     verifier.deleteArtifact(TEST_EXTENSION_GID, TEST_EXTENSION_AID, TEST_EXTENSION_VERSION, null);
-    verifier.deleteArtifact("org.mule.extension", "mule-basic-extension", "1.0.0-SNAPSHOT", null);
 
     // Delete the created maven project
     verifier.deleteDirectory(TEST_EXTENSION_AID);
-    verifier.deleteDirectory("mule-basic-extension");
   }
 
   @Test
   public void generateWithCustomProps() throws VerificationException {
-    Properties props = getMavenArchetypePluginProperties();
-
-    // Extensions archetype properties
-    props.put(EXTENSION_NAME, TEST_EXTENSION_NAME);
-    props.put(GROUP_ID, TEST_EXTENSION_GID);
-    props.put(ARTIFACT_ID, TEST_EXTENSION_AID);
-    props.put(EXTENSION_VERSION, TEST_EXTENSION_VERSION);
-
-    generateArchetype(props, TEST_EXTENSION_AID, TEST_EXTENSION_NAME);
-  }
-
-  @Test
-  public void generateWithNoProps() throws VerificationException {
-    generateArchetype(getMavenArchetypePluginProperties(), "mule-basic-extension", "Basic");
-  }
-
-  private void generateArchetype(Properties properties, String extAID, String extName) throws VerificationException {
-    verifier.setSystemProperties(properties);
+    verifier.setSystemProperties(getProperties());
     verifier.setAutoclean(false);
-
     // The Command Line Options (CLI) are passed to the verifier as a list.
     verifier.executeGoal("archetype:generate");
     verifier.setMavenDebug(true);
@@ -89,27 +69,29 @@ public class ExtensionArchetypeGenerationTestCase {
     verifier.verifyErrorFreeLog();
 
     // Since creating the archetype was successful, we now want to actually build the generated project
-    verifier = new Verifier(ROOT.getAbsolutePath() + "/" + extAID);
-    verifier.setSystemProperties(properties);
+    verifier = new Verifier(ROOT.getAbsolutePath() + "/" + TEST_EXTENSION_AID);
+    verifier.setMavenDebug(true);
+    verifier.executeGoal("verify", System.getenv());
 
-    verifier.assertFilePresent("src/main/java/org/mule/extension/" + extName + "ConnectionProvider.java");
-    verifier.assertFilePresent("src/main/java/org/mule/extension/" + extName + "Extension.java");
-    verifier.assertFilePresent("src/main/java/org/mule/extension/" + extName + "Configuration.java");
-    verifier.assertFilePresent("src/main/java/org/mule/extension/" + extName + "Operations.java");
+    verifier.verifyErrorFreeLog();
 
-//    verifier.setAutoclean(true);
-//    verifier.setMavenDebug(true);
-    verifier.executeGoal("verify");
-//    verifier.verifyErrorFreeLog();
+    verifier.assertFilePresent("target/classes/META-INF/extension-model.json");
   }
 
-  private static Properties getMavenArchetypePluginProperties() {
+  private static Properties getProperties() {
     Properties props = System.getProperties();
     // Archetype plugin properties
     props.put(ARCHETYPE_GID_PROP, EXTENSIONS_ARCHETYPE_GID);
     props.put(ARCHETYPE_AID_PROP, EXTENSIONS_ARCHETYPE_AID);
     props.put(ARCHETYPE_VERSION_PROP, EXTENSIONS_ARCHETYPE_VERSION);
     props.put(ARCHETYPE_INTERACTIVE_MODE_PROP, FALSE.toString());
+
+    // Extensions archetype properties
+    props.put(EXTENSION_NAME, TEST_EXTENSION_NAME);
+    props.put(GROUP_ID, TEST_EXTENSION_GID);
+    props.put(ARTIFACT_ID, TEST_EXTENSION_AID);
+    props.put(EXTENSION_VERSION, TEST_EXTENSION_VERSION);
+
     return props;
   }
 }
