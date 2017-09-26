@@ -15,27 +15,28 @@
 
     <properties>
         <formatterConfigPath>../formatter.xml</formatterConfigPath>
+        <mavenVerifierVersion>1.2</mavenVerifierVersion>
+        <junitVersion>4.2</junitVersion>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.apache.maven.shared</groupId>
             <artifactId>maven-verifier</artifactId>
-            <version>1.2</version>
+            <version>${mavenVerifierVersion}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.12</version>
+            <version>${junitVersion}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>extensions-generator-maven-plugin</artifactId>
-            <version>${parent.version}</version>
+            <version>${project.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
-
 </project>
