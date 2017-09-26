@@ -7,9 +7,22 @@
 
 package org.mule.extensions.archetype;
 
+import static java.lang.Boolean.FALSE;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.codehaus.plexus.util.StringUtils.capitalise;
 import static org.codehaus.plexus.util.StringUtils.trim;
+import static org.mule.extensions.archetype.ArchetypeConstants.EXTENSIONS_ARCHETYPE_AID;
+import static org.mule.extensions.archetype.ArchetypeConstants.ARCHETYPE_AID_PROP;
+import static org.mule.extensions.archetype.ArchetypeConstants.EXTENSIONS_ARCHETYPE_GID;
+import static org.mule.extensions.archetype.ArchetypeConstants.ARCHETYPE_GID_PROP;
+import static org.mule.extensions.archetype.ArchetypeConstants.ARCHETYPE_INTERACTIVE_MODE_PROP;
+import static org.mule.extensions.archetype.ArchetypeConstants.EXTENSIONS_ARCHETYPE_VERSION;
+import static org.mule.extensions.archetype.ArchetypeConstants.ARCHETYPE_VERSION_PROP;
+import static org.mule.extensions.archetype.ArchetypeConstants.ARTIFACT_ID;
+import static org.mule.extensions.archetype.ArchetypeConstants.GROUP_ID;
+import static org.mule.extensions.archetype.ArchetypeConstants.EXTENSION_NAME;
+import static org.mule.extensions.archetype.ArchetypeConstants.PACKAGE;
+import static org.mule.extensions.archetype.ArchetypeConstants.EXTENSION_VERSION;
 import static org.twdata.maven.mojoexecutor.MojoExecutor.artifactId;
 import static org.twdata.maven.mojoexecutor.MojoExecutor.configuration;
 import static org.twdata.maven.mojoexecutor.MojoExecutor.element;
@@ -33,18 +46,13 @@ import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
 
+/**
+ * Maven Plugin to generate a new extension project.
+ *
+ * @since 1.0
+ */
 @Mojo(name = "generate", requiresProject = false)
 public class ExtensionArchetypeGeneratorMojo extends AbstractMojo {
-
-  private static final String ARCHETYPE_GID = "org.mule.extensions";
-  private static final String ARCHETYPE_AID = "mule-extensions-archetype";
-  private static final String ARCHETYPE_VERSION = "1.0.0-SNAPSHOT";
-
-  private static final String NAME = "extensionName";
-  private static final String VERSION = "version";
-  private static final String GROUP_ID = "groupId";
-  private static final String ARTIFACT_ID = "artifactId";
-  private static final String PACKAGE = "package";
 
   @Component
   private MavenProject project;
@@ -55,7 +63,7 @@ public class ExtensionArchetypeGeneratorMojo extends AbstractMojo {
   @Component
   private BuildPluginManager pluginManager;
 
-  @Parameter(property = NAME)
+  @Parameter(property = EXTENSION_NAME)
   private String extensionName;
 
   @Parameter(property = GROUP_ID)
@@ -64,22 +72,25 @@ public class ExtensionArchetypeGeneratorMojo extends AbstractMojo {
   @Parameter(property = ARTIFACT_ID)
   private String extensionArtifactId;
 
-  @Parameter(property = VERSION)
+  @Parameter(property = EXTENSION_VERSION)
   private String extensionVersion;
 
   @Parameter(property = PACKAGE)
   private String mainPackage;
 
+  /**
+   * Executes the extensions archetype with the gathered information.
+   */
   public void execute() throws MojoExecutionException, MojoFailureException {
     initialise();
     try {
       executeArchetype();
     } catch (Exception e) {
       e.printStackTrace();
-      debugValue(NAME, extensionName);
+      debugValue(EXTENSION_NAME, extensionName);
       debugValue(GROUP_ID, extensionGroupId);
       debugValue(ARTIFACT_ID, extensionArtifactId);
-      debugValue(VERSION, extensionVersion);
+      debugValue(EXTENSION_VERSION, extensionVersion);
       debugValue(PACKAGE, mainPackage);
       throw new MojoFailureException("Failed to create project with the provided data: " + e.getMessage());
     }
@@ -88,20 +99,20 @@ public class ExtensionArchetypeGeneratorMojo extends AbstractMojo {
   private void executeArchetype() throws MojoExecutionException {
 
     // Sets the properties to the project so they can be fetched when generating the artifact
-    session.getUserProperties().setProperty(NAME, extensionName);
+    session.getUserProperties().setProperty(EXTENSION_NAME, extensionName);
     session.getUserProperties().setProperty(GROUP_ID, extensionGroupId);
     session.getUserProperties().setProperty(ARTIFACT_ID, extensionArtifactId);
     session.getUserProperties().setProperty(PACKAGE, mainPackage);
-    session.getUserProperties().setProperty(VERSION, extensionVersion);
+    session.getUserProperties().setProperty(EXTENSION_VERSION, extensionVersion);
 
     executeMojo(
       plugin(groupId("org.apache.maven.plugins"), artifactId("maven-archetype-plugin"), version("3.0.1")),
       goal("generate"),
       configuration(
-          element(name("archetypeGroupId"), ARCHETYPE_GID),
-          element(name("archetypeArtifactId"), ARCHETYPE_AID),
-          element(name("archetypeVersion"), ARCHETYPE_VERSION),
-          element(name("interactiveMode"), "false")
+          element(name(ARCHETYPE_GID_PROP), EXTENSIONS_ARCHETYPE_GID),
+          element(name(ARCHETYPE_AID_PROP), EXTENSIONS_ARCHETYPE_AID),
+          element(name(ARCHETYPE_VERSION_PROP), EXTENSIONS_ARCHETYPE_VERSION),
+          element(name(ARCHETYPE_INTERACTIVE_MODE_PROP), FALSE.toString())
       ),
       executionEnvironment(
         project,
@@ -127,7 +138,7 @@ public class ExtensionArchetypeGeneratorMojo extends AbstractMojo {
     if (isBlank(extensionName)) {
       System.out.println("* Enter the name of the extension (empty for default): ");
       this.extensionName = capitalise(trim(readLine()));
-      displayDefaultValueMessage(NAME, extensionName);
+      displayDefaultValueMessage(EXTENSION_NAME, extensionName);
     }
   }
 
@@ -151,7 +162,7 @@ public class ExtensionArchetypeGeneratorMojo extends AbstractMojo {
     if (isBlank(extensionVersion)) {
       System.out.println("* Enter the extension's version (empty for default): ");
       this.extensionVersion = trim(readLine());
-      displayDefaultValueMessage(VERSION, extensionVersion);
+      displayDefaultValueMessage(EXTENSION_VERSION, extensionVersion);
     }
   }
 

@@ -10,13 +10,33 @@
     </parent>
 
     <name>Mule Extensions Archetype Integration Tests</name>
-
-    <version>${parent.version}</version>
-    <modelVersion>4.0.0</modelVersion>
     <artifactId>mule-extensions-archetype-it</artifactId>
+    <modelVersion>4.0.0</modelVersion>
 
     <properties>
         <formatterConfigPath>../formatter.xml</formatterConfigPath>
+        <mavenVerifierVersion>1.2</mavenVerifierVersion>
+        <junitVersion>4.2</junitVersion>
     </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.maven.shared</groupId>
+            <artifactId>maven-verifier</artifactId>
+            <version>${mavenVerifierVersion}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junitVersion}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>extensions-generator-maven-plugin</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 </project>
