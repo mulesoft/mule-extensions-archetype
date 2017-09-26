@@ -9,8 +9,8 @@
     <packaging>pom</packaging>
 
     <!-- WARNING!!!! -->
-    <!-- When changing this version the static field ARCHETYPE_VERSION of the class
-    `ExtensionArchetypeGeneratorMojo` should ALSO be changed to match this version -->
+    <!-- When changing this version the static field ARCHETYPE_VERSION of the class `ArchetypeConstants`
+    should ALSO be changed to match this version -->
     <version>1.0.0-SNAPSHOT</version>
     <!-- WARNING!!! READ ABOVE project.getVersion() won't work since there is no project when the MOJO gets executed -->
 
@@ -18,8 +18,8 @@
 
     <modules>
         <module>mule-extensions-archetype</module>
-        <module>mule-extensions-archetype-it</module>
         <module>mule-extension-archetype-maven-plugin</module>
+        <module>mule-extensions-archetype-it</module>
     </modules>
 
     <properties>

@@ -19,4 +19,27 @@
         <formatterConfigPath>../formatter.xml</formatterConfigPath>
     </properties>
 
+
+
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.maven.shared</groupId>
+            <artifactId>maven-verifier</artifactId>
+            <version>1.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>extensions-generator-maven-plugin</artifactId>
+            <version>${parent.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
 </project>
