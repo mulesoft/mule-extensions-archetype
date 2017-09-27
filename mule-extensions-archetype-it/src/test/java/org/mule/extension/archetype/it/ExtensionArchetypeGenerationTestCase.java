@@ -80,6 +80,9 @@ public class ExtensionArchetypeGenerationTestCase {
 
   private static Properties getProperties() {
     Properties props = System.getProperties();
+
+    props.setProperty("maven.repo.remote", "https://repository-master.mulesoft.org/nexus/content/repositories/snapshots,https://repository-master.mulesoft.org/nexus/content/repositories/releases");
+
     // Archetype plugin properties
     props.put(ARCHETYPE_GID_PROP, EXTENSIONS_ARCHETYPE_GID);
     props.put(ARCHETYPE_AID_PROP, EXTENSIONS_ARCHETYPE_AID);
