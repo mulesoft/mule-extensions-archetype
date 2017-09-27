@@ -31,14 +31,13 @@ public class ${extensionName}ConnectionProvider implements PoolingConnectionProv
  /**
   * A parameter that is always required to be configured.
   */
-  @DisplayName("Required")
   @Parameter
   private String requiredParameter;
 
  /**
   * A parameter that is not required to be configured by the user.
   */
-  @DisplayName("Optional")
+  @DisplayName("Friendly Name")
   @Parameter
   @Optional(defaultValue = "100")
   private int optionalParameter;
