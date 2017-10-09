@@ -31,7 +31,6 @@ public class ${extensionName}Operations {
   /**
    * Private Methods are not exposed as operations
    */
-  @MediaType(value = ANY, strict = false)
   private String buildHelloMessage(String person) {
     return "Hello " + person + "!!!";
   }
