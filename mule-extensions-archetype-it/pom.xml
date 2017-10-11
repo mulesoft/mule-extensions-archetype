@@ -33,8 +33,8 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>extensions-generator-maven-plugin</artifactId>
+            <groupId>org.mule.extensions</groupId>
+            <artifactId>mule-extensions-archetype-maven-plugin</artifactId>
             <version>${project.version}</version>
             <scope>test</scope>
         </dependency>
