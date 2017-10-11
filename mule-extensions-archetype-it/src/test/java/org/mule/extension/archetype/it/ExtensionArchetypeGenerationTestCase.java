@@ -63,7 +63,7 @@ public class ExtensionArchetypeGenerationTestCase {
     verifier.setSystemProperties(getProperties());
     verifier.setAutoclean(false);
     // The Command Line Options (CLI) are passed to the verifier as a list.
-    verifier.executeGoal("archetype:generate");
+    verifier.executeGoal("org.mule.extensions:mule-extensions-archetype-maven-plugin:generate");
     verifier.setMavenDebug(true);
 
     verifier.verifyErrorFreeLog();

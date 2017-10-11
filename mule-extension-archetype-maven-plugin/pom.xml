@@ -2,25 +2,26 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
     <parent>
-        <artifactId>mule-extensions-archetype-parent</artifactId>
         <groupId>org.mule.extensions</groupId>
+        <artifactId>mule-extensions-archetype-parent</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
     <name>Mule Extensions Generator Maven Plugin</name>
     <description>A Maven Plugin to generate Mule Extension Projects</description>
 
-    <groupId>org.apache.maven.plugins</groupId>
-    <modelVersion>4.0.0</modelVersion>
+    <artifactId>mule-extensions-archetype-maven-plugin</artifactId>
     <packaging>maven-plugin</packaging>
-    <artifactId>extensions-generator-maven-plugin</artifactId>
 
     <properties>
         <mavenVersion>2.2.1</mavenVersion>
         <mavenPluginVersion>3.3</mavenPluginVersion>
         <mojoExecutorVersion>2.2.0</mojoExecutorVersion>
         <formatterConfigPath>../formatter.xml</formatterConfigPath>
+        <commonsLangVersion>3.5</commonsLangVersion>
     </properties>
 
     <dependencies>
@@ -43,7 +44,7 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.5</version>
+            <version>${commonsLangVersion}</version>
         </dependency>
     </dependencies>
 </project>
