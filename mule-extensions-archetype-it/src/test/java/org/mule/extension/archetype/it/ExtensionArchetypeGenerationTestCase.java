@@ -8,6 +8,7 @@
 package org.mule.extension.archetype.it;
 
 import static java.lang.Boolean.FALSE;
+import static java.util.Arrays.asList;
 import static org.mule.extensions.archetype.ArchetypeConstants.ARCHETYPE_INTERACTIVE_MODE_PROP;
 import static org.mule.extensions.archetype.ArchetypeConstants.EXTENSIONS_ARCHETYPE_AID;
 import static org.mule.extensions.archetype.ArchetypeConstants.ARCHETYPE_AID_PROP;
@@ -19,9 +20,11 @@ import static org.mule.extensions.archetype.ArchetypeConstants.ARTIFACT_ID;
 import static org.mule.extensions.archetype.ArchetypeConstants.EXTENSION_NAME;
 import static org.mule.extensions.archetype.ArchetypeConstants.GROUP_ID;
 import static org.mule.extensions.archetype.ArchetypeConstants.EXTENSION_VERSION;
+import static org.mule.extensions.archetype.ArchetypeConstants.PACKAGE;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Properties;
 
 import org.apache.maven.it.VerificationException;
@@ -33,10 +36,11 @@ public class ExtensionArchetypeGenerationTestCase {
 
   private static final File ROOT = new File("target/test-classes/");
 
-  private static final String TEST_EXTENSION_NAME = "Test";
+  private static final String TEST_EXTENSION_NAME = "Basic";
   private static final String TEST_EXTENSION_GID = "org.mule.test.extension";
   private static final String TEST_EXTENSION_AID = "test-extension";
   private static final String TEST_EXTENSION_VERSION = "1.0.0";
+  private static final String TEST_EXTENSION_PACKAGE = "org.mule.test";
 
   private Verifier verifier;
 
@@ -71,7 +75,7 @@ public class ExtensionArchetypeGenerationTestCase {
     // Since creating the archetype was successful, we now want to actually build the generated project
     verifier = new Verifier(ROOT.getAbsolutePath() + "/" + TEST_EXTENSION_AID);
     verifier.setMavenDebug(true);
-    verifier.executeGoal("verify", System.getenv());
+    verifier.executeGoals(Arrays.asList("compile", "test"), System.getenv());
 
     verifier.verifyErrorFreeLog();
 
@@ -94,6 +98,7 @@ public class ExtensionArchetypeGenerationTestCase {
     props.put(GROUP_ID, TEST_EXTENSION_GID);
     props.put(ARTIFACT_ID, TEST_EXTENSION_AID);
     props.put(EXTENSION_VERSION, TEST_EXTENSION_VERSION);
+    props.put(PACKAGE, TEST_EXTENSION_PACKAGE);
 
     return props;
   }
