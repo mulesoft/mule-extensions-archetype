@@ -16,7 +16,7 @@
     <properties>
         <formatterConfigPath>../formatter.xml</formatterConfigPath>
         <mavenVerifierVersion>1.2</mavenVerifierVersion>
-        <junitVersion>4.2</junitVersion>
+        <junitVersion>4.12</junitVersion>
     </properties>
 
     <dependencies>
