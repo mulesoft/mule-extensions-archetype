@@ -8,9 +8,9 @@
 package org.mule.extension.archetype.it;
 
 import static java.lang.Boolean.FALSE;
+import static java.lang.System.getProperty;
 import static java.lang.System.getenv;
 import static java.util.Arrays.asList;
-import static java.util.Collections.singletonMap;
 import static org.mule.extensions.archetype.ArchetypeConstants.ARCHETYPE_INTERACTIVE_MODE_PROP;
 import static org.mule.extensions.archetype.ArchetypeConstants.EXTENSIONS_ARCHETYPE_AID;
 import static org.mule.extensions.archetype.ArchetypeConstants.ARCHETYPE_AID_PROP;
@@ -26,10 +26,6 @@ import static org.mule.extensions.archetype.ArchetypeConstants.PACKAGE;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Properties;
 
 import org.apache.maven.it.VerificationException;
@@ -47,6 +43,7 @@ public class ExtensionArchetypeGenerationTestCase {
   private static final String TEST_EXTENSION_AID = "test-extension";
   private static final String TEST_EXTENSION_VERSION = "1.0.0";
   private static final String TEST_EXTENSION_PACKAGE = "org.mule.test";
+  private static final String MAVEN_OPTS = getProperty("argLine", "");
 
   private Verifier verifier;
 
@@ -79,7 +76,7 @@ public class ExtensionArchetypeGenerationTestCase {
     // Since creating the archetype was successful, we now want to actually build the generated project
     verifier = new Verifier(ROOT.getAbsolutePath() + "/" + TEST_EXTENSION_AID);
     verifier.setMavenDebug(true);
-    verifier.executeGoals(asList("compile", "test"), singletonMap(JAVA_HOME, getenv(JAVA_HOME)));
+    verifier.executeGoals(asList("compile", "test"), getEnvVars());
     verifier.verifyErrorFreeLog();
   }
 
@@ -100,5 +97,14 @@ public class ExtensionArchetypeGenerationTestCase {
     props.put(PACKAGE, TEST_EXTENSION_PACKAGE);
 
     return props;
+  }
+
+  private static Properties getEnvVars() {
+    Properties vars = new Properties();
+
+    vars.put("MAVEN_OPTS", MAVEN_OPTS);
+    vars.put(JAVA_HOME, getenv(JAVA_HOME));
+
+    return vars;
   }
 }

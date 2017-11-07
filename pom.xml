@@ -103,6 +103,9 @@
                                 <value>${project.build.directory}/allure-results</value>
                             </property>
                         </systemProperties>
+                        <systemPropertyVariables>
+                            <argLine>-javaagent:${settings.localRepository}/org/jacoco/org.jacoco.agent/${jacoco.version}/org.jacoco.agent-${jacoco.version}-runtime.jar=destfile=${session.executionRootDirectory}/target/jacoco-it.exec</argLine>
+                        </systemPropertyVariables>
                     </configuration>
                     <dependencies>
                         <dependency>
