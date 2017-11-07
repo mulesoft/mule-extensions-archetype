@@ -13,6 +13,7 @@
     <parent>
         <groupId>org.mule.extensions</groupId>
         <artifactId>mule-modules-parent</artifactId>
+        ## When changing this version the mule-modules-parent dependency in the tests should be also changed
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 

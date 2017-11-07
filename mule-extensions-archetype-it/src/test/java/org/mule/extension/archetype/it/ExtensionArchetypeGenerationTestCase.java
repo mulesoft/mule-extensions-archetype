@@ -8,7 +8,9 @@
 package org.mule.extension.archetype.it;
 
 import static java.lang.Boolean.FALSE;
+import static java.lang.System.getenv;
 import static java.util.Arrays.asList;
+import static java.util.Collections.singletonMap;
 import static org.mule.extensions.archetype.ArchetypeConstants.ARCHETYPE_INTERACTIVE_MODE_PROP;
 import static org.mule.extensions.archetype.ArchetypeConstants.EXTENSIONS_ARCHETYPE_AID;
 import static org.mule.extensions.archetype.ArchetypeConstants.ARCHETYPE_AID_PROP;
@@ -25,6 +27,9 @@ import static org.mule.extensions.archetype.ArchetypeConstants.PACKAGE;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 import org.apache.maven.it.VerificationException;
@@ -36,6 +41,7 @@ public class ExtensionArchetypeGenerationTestCase {
 
   private static final File ROOT = new File("target/test-classes/");
 
+  private static final String JAVA_HOME = "JAVA_HOME";
   private static final String TEST_EXTENSION_NAME = "Basic";
   private static final String TEST_EXTENSION_GID = "org.mule.test.extension";
   private static final String TEST_EXTENSION_AID = "test-extension";
@@ -63,29 +69,22 @@ public class ExtensionArchetypeGenerationTestCase {
   }
 
   @Test
-  public void generateWithCustomProps() throws VerificationException {
+  public void generateWithCustomProps() throws VerificationException, IOException {
     verifier.setSystemProperties(getProperties());
     verifier.setAutoclean(false);
-    // The Command Line Options (CLI) are passed to the verifier as a list.
     verifier.executeGoal("org.mule.extensions:mule-extensions-archetype-maven-plugin:generate");
     verifier.setMavenDebug(true);
-
     verifier.verifyErrorFreeLog();
 
     // Since creating the archetype was successful, we now want to actually build the generated project
     verifier = new Verifier(ROOT.getAbsolutePath() + "/" + TEST_EXTENSION_AID);
     verifier.setMavenDebug(true);
-    verifier.executeGoals(Arrays.asList("compile", "test"), System.getenv());
-
+    verifier.executeGoals(asList("compile", "test"), singletonMap(JAVA_HOME, getenv(JAVA_HOME)));
     verifier.verifyErrorFreeLog();
-
-    verifier.assertFilePresent("target/classes/META-INF/extension-model.json");
   }
 
   private static Properties getProperties() {
     Properties props = System.getProperties();
-
-    props.setProperty("maven.repo.remote", "https://repository-master.mulesoft.org/nexus/content/repositories/snapshots,https://repository-master.mulesoft.org/nexus/content/repositories/releases");
 
     // Archetype plugin properties
     props.put(ARCHETYPE_GID_PROP, EXTENSIONS_ARCHETYPE_GID);
