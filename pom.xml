@@ -34,6 +34,7 @@
         <allureReportVersion>2.3.4</allureReportVersion>
         <allure.maven.plugin.version>2.8</allure.maven.plugin.version>
         <jacoco.version>0.7.9</jacoco.version>
+        <modulesParentVersion>1.1.0-SNAPSHOT</modulesParentVersion>
     </properties>
 
     <build>
