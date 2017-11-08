@@ -69,7 +69,7 @@ public class ExtensionArchetypeGenerationTestCase {
   public void generateWithCustomProps() throws VerificationException, IOException {
     verifier.setSystemProperties(getProperties());
     verifier.setAutoclean(false);
-    verifier.executeGoal("org.mule.extensions:mule-extensions-archetype-maven-plugin:generate");
+    verifier.executeGoal("org.mule.extensions:mule-extensions-archetype-maven-plugin:generate", getEnvVars());
     verifier.setMavenDebug(true);
     verifier.verifyErrorFreeLog();
 
