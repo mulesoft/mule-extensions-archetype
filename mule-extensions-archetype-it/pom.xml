@@ -38,11 +38,5 @@
             <version>${project.version}</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.mule.extensions</groupId>
-            <artifactId>mule-modules-parent</artifactId>
-            <version>${modulesParentVersion}</version>
-            <type>pom</type>
-        </dependency>
     </dependencies>
 </project>
