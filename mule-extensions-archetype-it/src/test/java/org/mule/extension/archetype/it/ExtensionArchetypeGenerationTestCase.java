@@ -8,7 +8,7 @@
 package org.mule.extension.archetype.it;
 
 import static java.lang.Boolean.FALSE;
-import static java.util.Arrays.asList;
+import static java.lang.System.getProperty;
 import static org.mule.extensions.archetype.ArchetypeConstants.ARCHETYPE_INTERACTIVE_MODE_PROP;
 import static org.mule.extensions.archetype.ArchetypeConstants.EXTENSIONS_ARCHETYPE_AID;
 import static org.mule.extensions.archetype.ArchetypeConstants.ARCHETYPE_AID_PROP;
@@ -24,7 +24,9 @@ import static org.mule.extensions.archetype.ArchetypeConstants.PACKAGE;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Properties;
 
 import org.apache.maven.it.VerificationException;
@@ -41,6 +43,8 @@ public class ExtensionArchetypeGenerationTestCase {
   private static final String TEST_EXTENSION_AID = "test-extension";
   private static final String TEST_EXTENSION_VERSION = "1.0.0";
   private static final String TEST_EXTENSION_PACKAGE = "org.mule.test";
+  private static final String MAVEN_OPTS = getProperty("argLine", "");
+  private static final String MAVEN_SETTINGS_PROPERTY = "mule.extension.archetype.testSettings";
 
   private Verifier verifier;
 
@@ -74,6 +78,13 @@ public class ExtensionArchetypeGenerationTestCase {
 
     // Since creating the archetype was successful, we now want to actually build the generated project
     verifier = new Verifier(ROOT.getAbsolutePath() + "/" + TEST_EXTENSION_AID);
+
+    if(System.getProperty(MAVEN_SETTINGS_PROPERTY) != null){
+      List cliProps = new ArrayList<String>();
+      cliProps.add("-s " + System.getProperty(MAVEN_SETTINGS_PROPERTY, (String) null));
+      verifier.setCliOptions(cliProps);
+    }
+
     verifier.setMavenDebug(true);
     verifier.executeGoals(Arrays.asList("compile", "test"), System.getenv());
 
