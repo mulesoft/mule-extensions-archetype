@@ -84,13 +84,9 @@ public class ExtensionArchetypeGenerationTestCase {
       cliProps.add("-s " + System.getProperty(MAVEN_SETTINGS_PROPERTY, (String) null));
       verifier.setCliOptions(cliProps);
     }
-
     verifier.setMavenDebug(true);
     verifier.executeGoals(Arrays.asList("compile", "test"), System.getenv());
-
     verifier.verifyErrorFreeLog();
-
-    verifier.assertFilePresent("target/classes/META-INF/extension-model.json");
   }
 
   private static Properties getProperties() {
