@@ -12,7 +12,7 @@ There is a maven plugin with steps and descriptions for the required fields in o
 By running the following command you will get prompt for values.
 
 ```
-mvn extensions-generator:generate
+mvn mule-extensions-archetype:generate
 ```
 
 ## Old School Archetype
