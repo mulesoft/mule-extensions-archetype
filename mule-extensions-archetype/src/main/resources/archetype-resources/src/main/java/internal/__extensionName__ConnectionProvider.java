@@ -1,4 +1,4 @@
-package ${package};
+package ${package}.internal;
 
 import org.mule.runtime.api.connection.ConnectionException;
 import org.mule.runtime.extension.api.annotation.param.Parameter;

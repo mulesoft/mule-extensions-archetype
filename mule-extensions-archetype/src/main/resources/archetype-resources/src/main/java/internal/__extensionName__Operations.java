@@ -1,4 +1,4 @@
-package ${package};
+package ${package}.internal;
 
 import static org.mule.runtime.extension.api.annotation.param.MediaType.ANY;
 

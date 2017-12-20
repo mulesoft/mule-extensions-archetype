@@ -70,7 +70,16 @@ public class ExtensionArchetypeGenerationTestCase {
 
   @Test
   public void generateWithCustomProps() throws VerificationException, IOException {
-    verifier.setSystemProperties(getProperties());
+    generate(getAllProperties());
+  }
+
+  @Test
+  public void generateWithDefaultProps() throws VerificationException, IOException {
+    generate(getPluginProperties());
+  }
+
+  private void generate(Properties pluginProperties) throws VerificationException {
+    verifier.setSystemProperties(pluginProperties);
     verifier.setAutoclean(false);
     verifier.executeGoal("org.mule.extensions:mule-extensions-archetype-maven-plugin:generate", getEnvVars());
     verifier.setMavenDebug(true);
@@ -79,7 +88,7 @@ public class ExtensionArchetypeGenerationTestCase {
     // Since creating the archetype was successful, we now want to actually build the generated project
     verifier = new Verifier(ROOT.getAbsolutePath() + "/" + TEST_EXTENSION_AID);
 
-    if(System.getProperty(MAVEN_SETTINGS_PROPERTY) != null){
+    if (System.getProperty(MAVEN_SETTINGS_PROPERTY) != null) {
       List cliProps = new ArrayList<String>();
       cliProps.add("-s " + System.getProperty(MAVEN_SETTINGS_PROPERTY, (String) null));
       verifier.setCliOptions(cliProps);
@@ -90,14 +99,8 @@ public class ExtensionArchetypeGenerationTestCase {
     verifier.verifyErrorFreeLog();
   }
 
-  private static Properties getProperties() {
-    Properties props = System.getProperties();
-
-    // Archetype plugin properties
-    props.put(ARCHETYPE_GID_PROP, EXTENSIONS_ARCHETYPE_GID);
-    props.put(ARCHETYPE_AID_PROP, EXTENSIONS_ARCHETYPE_AID);
-    props.put(ARCHETYPE_VERSION_PROP, EXTENSIONS_ARCHETYPE_VERSION);
-    props.put(ARCHETYPE_INTERACTIVE_MODE_PROP, FALSE.toString());
+  private static Properties getAllProperties() {
+    Properties props = getPluginProperties();
 
     // Extensions archetype properties
     props.put(EXTENSION_NAME, TEST_EXTENSION_NAME);
@@ -105,6 +108,18 @@ public class ExtensionArchetypeGenerationTestCase {
     props.put(ARTIFACT_ID, TEST_EXTENSION_AID);
     props.put(EXTENSION_VERSION, TEST_EXTENSION_VERSION);
     props.put(PACKAGE, TEST_EXTENSION_PACKAGE);
+
+    return props;
+  }
+
+  private static Properties getPluginProperties() {
+    Properties props = System.getProperties();
+
+    // Archetype plugin properties
+    props.put(ARCHETYPE_GID_PROP, EXTENSIONS_ARCHETYPE_GID);
+    props.put(ARCHETYPE_AID_PROP, EXTENSIONS_ARCHETYPE_AID);
+    props.put(ARCHETYPE_VERSION_PROP, EXTENSIONS_ARCHETYPE_VERSION);
+    props.put(ARCHETYPE_INTERACTIVE_MODE_PROP, FALSE.toString());
 
     return props;
   }
