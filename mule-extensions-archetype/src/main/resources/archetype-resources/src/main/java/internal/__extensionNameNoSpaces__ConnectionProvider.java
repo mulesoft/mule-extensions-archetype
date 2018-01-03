@@ -24,9 +24,9 @@ import org.slf4j.LoggerFactory;
  * will be pooled and reused. There are other implementations like {@link CachedConnectionProvider} which lazily creates and
  * caches connections or simply {@link ConnectionProvider} if you want a new connection each time something requires one.
  */
-public class ${extensionName}ConnectionProvider implements PoolingConnectionProvider<${extensionName}Connection> {
+public class ${extensionNameNoSpaces}ConnectionProvider implements PoolingConnectionProvider<${extensionNameNoSpaces}Connection> {
 
-  private final Logger LOGGER = LoggerFactory.getLogger(${extensionName}ConnectionProvider.class);
+  private final Logger LOGGER = LoggerFactory.getLogger(${extensionNameNoSpaces}ConnectionProvider.class);
 
  /**
   * A parameter that is always required to be configured.
@@ -43,12 +43,12 @@ public class ${extensionName}ConnectionProvider implements PoolingConnectionProv
   private int optionalParameter;
 
   @Override
-  public ${extensionName}Connection connect() throws ConnectionException {
-    return new ${extensionName}Connection(requiredParameter + ":" + optionalParameter);
+  public ${extensionNameNoSpaces}Connection connect() throws ConnectionException {
+    return new ${extensionNameNoSpaces}Connection(requiredParameter + ":" + optionalParameter);
   }
 
   @Override
-  public void disconnect(${extensionName}Connection connection) {
+  public void disconnect(${extensionNameNoSpaces}Connection connection) {
     try {
       connection.invalidate();
     } catch (Exception e) {
@@ -57,7 +57,7 @@ public class ${extensionName}ConnectionProvider implements PoolingConnectionProv
   }
 
   @Override
-  public ConnectionValidationResult validate(${extensionName}Connection connection) {
+  public ConnectionValidationResult validate(${extensionNameNoSpaces}Connection connection) {
     return ConnectionValidationResult.success();
   }
 }

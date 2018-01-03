@@ -10,13 +10,13 @@ import org.mule.runtime.extension.api.annotation.param.Connection;
 /**
  * This class is a container for operations, every public method in this class will be taken as an extension operation.
  */
-public class ${extensionName}Operations {
+public class ${extensionNameNoSpaces}Operations {
 
   /**
    * Example of an operation that uses the configuration and a connection instance to perform some action.
    */
   @MediaType(value = ANY, strict = false)
-  public String retrieveInfo(@Config ${extensionName}Configuration configuration, @Connection ${extensionName}Connection connection){
+  public String retrieveInfo(@Config ${extensionNameNoSpaces}Configuration configuration, @Connection ${extensionNameNoSpaces}Connection connection){
     return "Using Configuration [" + configuration.getConfigId() + "] with Connection id [" + connection.getId() + "]";
   }
 
