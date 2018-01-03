@@ -61,6 +61,11 @@ public class ExtensionArchetypeGenerationTestCase {
   }
 
   @Test
+  public void generateWithNameWithHyphens() throws Exception {
+    generate(TEST_EXTENSION_GID, TEST_EXTENSION_AID, TEST_EXTENSION_VERSION, getAllProperties("my-pepe-extension"));
+  }
+
+  @Test
   public void generateDefault() throws Exception {
     // default values specified in the archetype
     generate("org.mule.extension", "mule-basic-extension", "1.0.0-SNAPSHOT", getPluginProperties());

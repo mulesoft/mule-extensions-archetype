@@ -1,4 +1,4 @@
-#set($xsdName = ${extensionName.toLowerCase().replaceAll("(?i)extension", "").replaceAll("(?i)connector", "").trim().replace(" ", "-")})
+#set($xsdName = ${extensionName.toLowerCase().replaceAll("(?i)extension", "").replaceAll("(?i)connector", "").trim().replace(" ", "-").replaceAll("-$", "")})
 <mule xmlns="http://www.mulesoft.org/schema/mule/core"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xmlns:$xsdName="http://www.mulesoft.org/schema/mule/$xsdName"

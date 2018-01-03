@@ -19,7 +19,7 @@
             <defaultValue>Basic</defaultValue>
         </requiredProperty>
         <requiredProperty key="extensionNameNoSpaces">
-            <defaultValue>${extensionName.replace(" ", "").replaceAll("(?i)extension", "").replaceAll("(?i)connector", "").trim()}</defaultValue>
+            <defaultValue>${extensionName.replace("-", " ").replace(" ", "").replaceAll("(?i)extension", "").replaceAll("(?i)connector", "").trim()}</defaultValue>
         </requiredProperty>
     </requiredProperties>
 
