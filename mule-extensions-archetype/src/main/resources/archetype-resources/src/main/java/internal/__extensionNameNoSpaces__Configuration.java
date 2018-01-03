@@ -8,9 +8,9 @@ import org.mule.runtime.extension.api.annotation.param.Parameter;
  * This class represents an extension configuration, values set in this class are commonly used across multiple
  * operations since they represent something core from the extension.
  */
-@Operations(${extensionName}Operations.class)
-@ConnectionProviders(${extensionName}ConnectionProvider.class)
-public class ${extensionName}Configuration {
+@Operations(${extensionNameNoSpaces}Operations.class)
+@ConnectionProviders(${extensionNameNoSpaces}ConnectionProvider.class)
+public class ${extensionNameNoSpaces}Configuration {
 
   @Parameter
   private String configId;

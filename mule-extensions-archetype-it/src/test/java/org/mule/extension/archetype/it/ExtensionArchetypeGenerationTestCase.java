@@ -50,43 +50,34 @@ public class ExtensionArchetypeGenerationTestCase {
 
   private Verifier verifier;
 
-  @Before
-  public void setUp() throws VerificationException, IOException {
-    /*
-     * We must first make sure that any artifact created
-     * by this test has been removed from the local
-     * repository. Failing to do this could cause
-     * unstable test results. Fortunately, the verifier
-     * makes it easy to do this.
-     */
-    verifier = new Verifier(ROOT.getAbsolutePath());
-
-    // Deleting a former created artifact from the archetype to be tested
-    verifier.deleteArtifact(TEST_EXTENSION_GID, TEST_EXTENSION_AID, TEST_EXTENSION_VERSION, null);
-
-    // Delete the created maven project
-    verifier.deleteDirectory(TEST_EXTENSION_AID);
+  @Test
+  public void generateWithCustomProps() throws Exception {
+    generate(TEST_EXTENSION_GID, TEST_EXTENSION_AID, TEST_EXTENSION_VERSION, getAllProperties("Basic"));
   }
 
   @Test
-  public void generateWithCustomProps() throws VerificationException, IOException {
-    generate(getAllProperties());
+  public void generateWithNameWithSpaces() throws Exception {
+    generate(TEST_EXTENSION_GID, TEST_EXTENSION_AID, TEST_EXTENSION_VERSION, getAllProperties("Basic Pepe Extension"));
   }
 
   @Test
-  public void generateWithDefaultProps() throws VerificationException, IOException {
-    generate(getPluginProperties());
+  public void generateDefault() throws Exception {
+    // default values specified in the archetype
+    generate("org.mule.extension", "mule-basic-extension", "1.0.0-SNAPSHOT", getPluginProperties());
   }
 
-  private void generate(Properties pluginProperties) throws VerificationException {
+  private void generate(String groupId, String artifactId, String version, Properties pluginProperties) throws Exception {
+    // Cleans up the test context
+    clean(groupId, artifactId, version);
+
     verifier.setSystemProperties(pluginProperties);
     verifier.setAutoclean(false);
-    verifier.executeGoal("org.mule.extensions:mule-extensions-archetype-maven-plugin:generate", getEnvVars());
+    verifier.executeGoal("archetype:generate", getEnvVars());
     verifier.setMavenDebug(true);
     verifier.verifyErrorFreeLog();
 
     // Since creating the archetype was successful, we now want to actually build the generated project
-    verifier = new Verifier(ROOT.getAbsolutePath() + "/" + TEST_EXTENSION_AID);
+    verifier = new Verifier(ROOT.getAbsolutePath() + "/" + artifactId);
 
     if (System.getProperty(MAVEN_SETTINGS_PROPERTY) != null) {
       List cliProps = new ArrayList<String>();
@@ -99,11 +90,28 @@ public class ExtensionArchetypeGenerationTestCase {
     verifier.verifyErrorFreeLog();
   }
 
-  private static Properties getAllProperties() {
+  private void clean(String groupId, String artifactId, String version) throws VerificationException, IOException {
+    /*
+     * We must first make sure that any artifact created
+     * by this test has been removed from the local
+     * repository. Failing to do this could cause
+     * unstable test results. Fortunately, the verifier
+     * makes it easy to do this.
+     */
+    verifier = new Verifier(ROOT.getAbsolutePath());
+
+    // Deleting a former created artifact from the archetype to be tested
+    verifier.deleteArtifact(groupId, artifactId, version, null);
+
+    // Delete the created maven project
+    verifier.deleteDirectory(TEST_EXTENSION_AID);
+  }
+
+  private static Properties getAllProperties(String extensionName) {
     Properties props = getPluginProperties();
 
     // Extensions archetype properties
-    props.put(EXTENSION_NAME, TEST_EXTENSION_NAME);
+    props.put(EXTENSION_NAME, extensionName);
     props.put(GROUP_ID, TEST_EXTENSION_GID);
     props.put(ARTIFACT_ID, TEST_EXTENSION_AID);
     props.put(EXTENSION_VERSION, TEST_EXTENSION_VERSION);

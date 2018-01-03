@@ -99,7 +99,7 @@ public class ExtensionArchetypeGeneratorMojo extends AbstractMojo {
   private void executeArchetype() throws MojoExecutionException {
 
     // Sets the properties to the project so they can be fetched when generating the artifact
-    session.getUserProperties().setProperty(EXTENSION_NAME, extensionName);
+    session.getUserProperties().setProperty(EXTENSION_NAME, normalizeName(extensionName));
     session.getUserProperties().setProperty(GROUP_ID, extensionGroupId);
     session.getUserProperties().setProperty(ARTIFACT_ID, extensionArtifactId);
     session.getUserProperties().setProperty(PACKAGE, mainPackage);
@@ -120,6 +120,10 @@ public class ExtensionArchetypeGeneratorMojo extends AbstractMojo {
         pluginManager
       )
     );
+  }
+
+  private String normalizeName(String extensionName) {
+    return extensionName.replaceAll("(?i)extension", "").replaceAll("(?i)connector", "").trim();
   }
 
   private void debugValue(String name, String value) {

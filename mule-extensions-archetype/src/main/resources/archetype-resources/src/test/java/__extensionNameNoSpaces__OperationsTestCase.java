@@ -5,7 +5,7 @@ import static org.hamcrest.core.Is.is;
 import org.mule.functional.junit4.MuleArtifactFunctionalTestCase;
 import org.junit.Test;
 
-public class ${extensionName}OperationsTestCase extends MuleArtifactFunctionalTestCase {
+public class ${extensionNameNoSpaces}OperationsTestCase extends MuleArtifactFunctionalTestCase {
 
   /**
    * Specifies the mule config xml with the flows that are going to be executed in the tests, this file lives in the test resources.
@@ -21,7 +21,7 @@ public class ${extensionName}OperationsTestCase extends MuleArtifactFunctionalTe
                                       .getMessage()
                                       .getPayload()
                                       .getValue());
-    assertThat(payloadValue, is("Hello Mariano Gonzales!!!"));
+    assertThat(payloadValue, is("Hello Mariano Gonzalez!!!"));
   }
 
   @Test
