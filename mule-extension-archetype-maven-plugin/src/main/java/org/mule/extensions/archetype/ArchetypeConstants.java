@@ -24,6 +24,7 @@ public class ArchetypeConstants {
   public static final String EXTENSIONS_ARCHETYPE_VERSION = "1.2.0-SNAPSHOT";
 
   public static final String EXTENSION_NAME = "extensionName";
+  public static final String EXTENSION_NAME_NO_SPACES = "extensionNameNoSpaces";
   public static final String EXTENSION_VERSION = "version";
   public static final String GROUP_ID = "groupId";
   public static final String ARTIFACT_ID = "artifactId";

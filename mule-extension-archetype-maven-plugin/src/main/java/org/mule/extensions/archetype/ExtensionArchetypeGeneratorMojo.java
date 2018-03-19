@@ -19,6 +19,7 @@ import static org.mule.extensions.archetype.ArchetypeConstants.ARCHETYPE_INTERAC
 import static org.mule.extensions.archetype.ArchetypeConstants.EXTENSIONS_ARCHETYPE_VERSION;
 import static org.mule.extensions.archetype.ArchetypeConstants.ARCHETYPE_VERSION_PROP;
 import static org.mule.extensions.archetype.ArchetypeConstants.ARTIFACT_ID;
+import static org.mule.extensions.archetype.ArchetypeConstants.EXTENSION_NAME_NO_SPACES;
 import static org.mule.extensions.archetype.ArchetypeConstants.GROUP_ID;
 import static org.mule.extensions.archetype.ArchetypeConstants.EXTENSION_NAME;
 import static org.mule.extensions.archetype.ArchetypeConstants.PACKAGE;
@@ -98,12 +99,15 @@ public class ExtensionArchetypeGeneratorMojo extends AbstractMojo {
 
   private void executeArchetype() throws MojoExecutionException {
 
+    String normalizedExtensionName = normalizeName(extensionName);
+
     // Sets the properties to the project so they can be fetched when generating the artifact
-    session.getUserProperties().setProperty(EXTENSION_NAME, normalizeName(extensionName));
+    session.getUserProperties().setProperty(EXTENSION_NAME, normalizedExtensionName);
     session.getUserProperties().setProperty(GROUP_ID, extensionGroupId);
     session.getUserProperties().setProperty(ARTIFACT_ID, extensionArtifactId);
     session.getUserProperties().setProperty(PACKAGE, mainPackage);
     session.getUserProperties().setProperty(EXTENSION_VERSION, extensionVersion);
+    session.getUserProperties().setProperty(EXTENSION_NAME_NO_SPACES, withNoSpaces(normalizedExtensionName));
 
     executeMojo(
       plugin(groupId("org.apache.maven.plugins"), artifactId("maven-archetype-plugin"), version("3.0.1")),
@@ -121,9 +125,12 @@ public class ExtensionArchetypeGeneratorMojo extends AbstractMojo {
       )
     );
   }
-
   private String normalizeName(String extensionName) {
     return extensionName.replaceAll("(?i)extension", "").replaceAll("(?i)connector", "").trim();
+  }
+
+  private String withNoSpaces(String extensionName) {
+    return extensionName.replace("-", " ").replace(" ", "").replaceAll("(?i)extension", "").replaceAll("(?i)connector", "").trim();
   }
 
   private void debugValue(String name, String value) {
