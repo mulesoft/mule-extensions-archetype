@@ -16,10 +16,10 @@
             <defaultValue>org.mule.extension</defaultValue>
         </requiredProperty>
         <requiredProperty key="extensionName">
-            <defaultValue>Basic One</defaultValue>
+            <defaultValue>Basic</defaultValue>
         </requiredProperty>
         <requiredProperty key="extensionNameNoSpaces">
-            <defaultValue>BasicOne</defaultValue>
+            <defaultValue>Basic</defaultValue>
         </requiredProperty>
     </requiredProperties>
 
