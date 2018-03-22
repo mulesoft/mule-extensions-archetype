@@ -11,6 +11,7 @@ import static java.lang.Boolean.FALSE;
 import static java.lang.System.getProperty;
 import static java.lang.System.getenv;
 import static java.util.Arrays.asList;
+import static org.apache.commons.io.FileUtils.readFileToString;
 import static org.mule.extensions.archetype.ArchetypeConstants.ARCHETYPE_INTERACTIVE_MODE_PROP;
 import static org.mule.extensions.archetype.ArchetypeConstants.EXTENSIONS_ARCHETYPE_AID;
 import static org.mule.extensions.archetype.ArchetypeConstants.ARCHETYPE_AID_PROP;
@@ -20,27 +21,33 @@ import static org.mule.extensions.archetype.ArchetypeConstants.EXTENSIONS_ARCHET
 import static org.mule.extensions.archetype.ArchetypeConstants.ARCHETYPE_VERSION_PROP;
 import static org.mule.extensions.archetype.ArchetypeConstants.ARTIFACT_ID;
 import static org.mule.extensions.archetype.ArchetypeConstants.EXTENSION_NAME;
+import static org.mule.extensions.archetype.ArchetypeConstants.EXTENSION_NAME_NO_SPACES;
 import static org.mule.extensions.archetype.ArchetypeConstants.GROUP_ID;
 import static org.mule.extensions.archetype.ArchetypeConstants.EXTENSION_VERSION;
 import static org.mule.extensions.archetype.ArchetypeConstants.PACKAGE;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Properties;
 
 import org.apache.maven.it.VerificationException;
 import org.apache.maven.it.Verifier;
-import org.junit.Before;
+import org.apache.tika.io.IOUtils;
 import org.junit.Test;
+import org.skyscreamer.jsonassert.JSONAssert;
 
 public class ExtensionArchetypeGenerationTestCase {
 
   private static final File ROOT = new File("target/test-classes/");
+  private static final String TEMPORAL_EXTENSION_MODEL_PATH_TEMPLATE = ROOT.getAbsolutePath() +"/%s/target/temporal-extension-model.json";
 
   private static final String JAVA_HOME = "JAVA_HOME";
   private static final String TEST_EXTENSION_NAME = "Basic";
+  private static final String TEST_EXTENSION_NAME_NO_SPACES = "Basic";
   private static final String TEST_EXTENSION_GID = "org.mule.test.extension";
   private static final String TEST_EXTENSION_AID = "test-extension";
   private static final String TEST_EXTENSION_VERSION = "1.0.0";
@@ -52,17 +59,17 @@ public class ExtensionArchetypeGenerationTestCase {
 
   @Test
   public void generateWithCustomProps() throws Exception {
-    generate(TEST_EXTENSION_GID, TEST_EXTENSION_AID, TEST_EXTENSION_VERSION, getAllProperties("Basic"));
+    generate(TEST_EXTENSION_GID, TEST_EXTENSION_AID, TEST_EXTENSION_VERSION, getAllProperties("BasicName", "BasicName"));
   }
 
   @Test
   public void generateWithNameWithSpaces() throws Exception {
-    generate(TEST_EXTENSION_GID, TEST_EXTENSION_AID, TEST_EXTENSION_VERSION, getAllProperties("Basic Pepe Extension"));
+    generate(TEST_EXTENSION_GID, TEST_EXTENSION_AID, TEST_EXTENSION_VERSION, getAllProperties("Basic Pepe Extension", "BasicPepeExtension"));
   }
 
   @Test
   public void generateWithNameWithHyphens() throws Exception {
-    generate(TEST_EXTENSION_GID, TEST_EXTENSION_AID, TEST_EXTENSION_VERSION, getAllProperties("my-pepe-extension"));
+    generate(TEST_EXTENSION_GID, TEST_EXTENSION_AID, TEST_EXTENSION_VERSION, getAllProperties("my-pepe-extension", "MyPepeExtension"));
   }
 
   @Test
@@ -89,10 +96,28 @@ public class ExtensionArchetypeGenerationTestCase {
       cliProps.add("-s " + System.getProperty(MAVEN_SETTINGS_PROPERTY, (String) null));
       verifier.setCliOptions(cliProps);
     }
-
+    verifier.addCliOption("-DskipDocumentation");
     verifier.setMavenDebug(true);
-    verifier.executeGoals(asList("compile", "test"), getEnvVars());
+    verifier.executeGoals(asList("package"), getEnvVars());
     verifier.verifyErrorFreeLog();
+    Optional<String> extensionName = Optional.ofNullable(pluginProperties.getProperty(EXTENSION_NAME));
+    verifyExtensionModel(extensionName.orElse(TEST_EXTENSION_NAME), artifactId);
+  }
+
+  private void verifyExtensionModel(String extensionName, String artifactId) throws Exception {
+    String normalizedExtensionName = extensionName.toLowerCase().replace(" ", "-");
+    String actualExtensionModel = getActualExtensionModel(artifactId);
+    String expectedExtensionModel = getExpectedExtensionModel(normalizedExtensionName) ;
+    JSONAssert.assertEquals(expectedExtensionModel, actualExtensionModel,true);
+  }
+
+  private String getExpectedExtensionModel(String extensionName) throws Exception {
+    InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream(extensionName+".json");
+    return IOUtils.toString(is);
+   }
+
+  private String getActualExtensionModel(String artifactId) throws Exception{
+    return readFileToString(new File(String.format(TEMPORAL_EXTENSION_MODEL_PATH_TEMPLATE, artifactId)));
   }
 
   private void clean(String groupId, String artifactId, String version) throws VerificationException, IOException {
@@ -112,11 +137,12 @@ public class ExtensionArchetypeGenerationTestCase {
     verifier.deleteDirectory(TEST_EXTENSION_AID);
   }
 
-  private static Properties getAllProperties(String extensionName) {
+  private static Properties getAllProperties(String extensionName, String extensionNameNoSpaces) {
     Properties props = getPluginProperties();
 
     // Extensions archetype properties
     props.put(EXTENSION_NAME, extensionName);
+    props.put(EXTENSION_NAME_NO_SPACES, extensionNameNoSpaces);
     props.put(GROUP_ID, TEST_EXTENSION_GID);
     props.put(ARTIFACT_ID, TEST_EXTENSION_AID);
     props.put(EXTENSION_VERSION, TEST_EXTENSION_VERSION);
