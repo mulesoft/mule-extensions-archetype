@@ -11,6 +11,7 @@ import static java.lang.Boolean.FALSE;
 import static java.lang.System.getProperty;
 import static java.lang.System.getenv;
 import static java.util.Arrays.asList;
+import static org.apache.commons.io.FileUtils.readFileToString;
 import static org.mule.extensions.archetype.ArchetypeConstants.ARCHETYPE_INTERACTIVE_MODE_PROP;
 import static org.mule.extensions.archetype.ArchetypeConstants.EXTENSIONS_ARCHETYPE_AID;
 import static org.mule.extensions.archetype.ArchetypeConstants.ARCHETYPE_AID_PROP;
@@ -27,6 +28,7 @@ import static org.mule.extensions.archetype.ArchetypeConstants.PACKAGE;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -34,15 +36,14 @@ import java.util.Properties;
 
 import org.apache.maven.it.VerificationException;
 import org.apache.maven.it.Verifier;
-import org.json.JSONException;
-import org.junit.Before;
+import org.apache.tika.io.IOUtils;
 import org.junit.Test;
-import org.mule.runtime.core.api.util.IOUtils;
 import org.skyscreamer.jsonassert.JSONAssert;
 
 public class ExtensionArchetypeGenerationTestCase {
 
   private static final File ROOT = new File("target/test-classes/");
+  private static final String TEMPORAL_EXTENSION_MODEL_PATH_TEMPLATE = ROOT.getAbsolutePath() +"/%s/target/temporal-extension-model.json";
 
   private static final String JAVA_HOME = "JAVA_HOME";
   private static final String TEST_EXTENSION_NAME = "Basic";
@@ -106,17 +107,17 @@ public class ExtensionArchetypeGenerationTestCase {
   private void verifyExtensionModel(String extensionName, String artifactId) throws Exception {
     String normalizedExtensionName = extensionName.toLowerCase().replace(" ", "-");
     String actualExtensionModel = getActualExtensionModel(artifactId);
-    String expectedExtensionModel = getExpectedExtensionModel(normalizedExtensionName, artifactId) ;
+    String expectedExtensionModel = getExpectedExtensionModel(normalizedExtensionName) ;
     JSONAssert.assertEquals(expectedExtensionModel, actualExtensionModel,true);
   }
 
-  private String getExpectedExtensionModel(String extensionName, String artifactId) throws Exception {
-    return IOUtils.getResourceAsString("./src/test/resources/"+extensionName+".json",this.getClass());
-  }
+  private String getExpectedExtensionModel(String extensionName) throws Exception {
+    InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream(extensionName+".json");
+    return IOUtils.toString(is);
+   }
 
   private String getActualExtensionModel(String artifactId) throws Exception{
-    return IOUtils.getResourceAsString(ROOT.getAbsolutePath() + "/" + artifactId
-            + "/target/temporal-extension-model.json",this.getClass());
+    return readFileToString(new File(String.format(TEMPORAL_EXTENSION_MODEL_PATH_TEMPLATE, artifactId)));
   }
 
   private void clean(String groupId, String artifactId, String version) throws VerificationException, IOException {
