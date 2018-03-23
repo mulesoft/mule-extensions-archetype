@@ -55,6 +55,8 @@ import org.apache.maven.project.MavenProject;
 @Mojo(name = "generate", requiresProject = false)
 public class ExtensionArchetypeGeneratorMojo extends AbstractMojo {
 
+  private static String DEFAULT_PACKAGE_TEMPLATE = "org.mule.extension.%s";
+
   @Component
   private MavenProject project;
 
@@ -182,6 +184,9 @@ public class ExtensionArchetypeGeneratorMojo extends AbstractMojo {
       System.out.println("* Enter the extension's main package (empty for default): ");
       this.mainPackage = trim(readLine());
       displayDefaultValueMessage(PACKAGE, mainPackage);
+      if (isBlank(mainPackage)) {
+        useDefaultPackage();
+      }
     }
   }
 
@@ -194,5 +199,13 @@ public class ExtensionArchetypeGeneratorMojo extends AbstractMojo {
     if (isBlank(prop)) {
       System.out.println("Using default value for property [" + name + "]");
     }
+  }
+
+  private void useDefaultPackage() {
+    this.mainPackage = String.format(DEFAULT_PACKAGE_TEMPLATE, sanitizeForPackageName(extensionName));
+  }
+
+  private String sanitizeForPackageName(String extensionName) {
+    return normalizeName(extensionName).replace("-", " ").replaceAll(" +", " ").replace(" ", ".").toLowerCase();
   }
 }
