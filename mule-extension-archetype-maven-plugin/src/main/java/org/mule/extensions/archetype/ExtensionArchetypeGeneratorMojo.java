@@ -184,7 +184,7 @@ public class ExtensionArchetypeGeneratorMojo extends AbstractMojo {
       System.out.println("* Enter the extension's main package (empty for default): ");
       this.mainPackage = trim(readLine());
       displayDefaultValueMessage(PACKAGE, mainPackage);
-      if (isBlank(mainPackage)) {
+      if (isBlank(mainPackage) && !isBlank(extensionName)) {
         useDefaultPackage();
       }
     }
