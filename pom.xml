@@ -15,6 +15,106 @@
     <!-- WARNING!!! READ ABOVE project.getVersion() won't work since there is no project when the MOJO gets executed -->
 
     <name>Mule Extensions Archetype Maven Plugin</name>
+    <description>Maven Archetype to create new Mule Extension projects.</description>
+    <url>https://github.com/mulesoft/mule-extensions-archetype</url>
+    <organization>
+        <name>MuleSoft, Inc.</name>
+        <url>http://www.mulesoft.com</url>
+    </organization>
+    <licenses>
+        <license>
+            <name>CPAL v1.0</name>
+            <url>http://www.mulesoft.com/CPAL</url>
+        </license>
+    </licenses>
+    <mailingLists>
+        <mailingList>
+            <name>developers</name>
+            <post>mule-esb@mulesoft.com</post>
+        </mailingList>
+    </mailingLists>
+
+    <developers>
+        <developer>
+            <id>canoasan</id>
+            <name>Matias Baldini</name>
+            <email>matias.baldini@mulesoft.com</email>
+            <roles>
+                <role>Project Manager</role>
+            </roles>
+        </developer>
+        <developer>
+            <id>aiannucci</id>
+            <name>Alejandro Iannucci</name>
+        </developer>
+        <developer>
+            <id>afelisatti</id>
+            <name>Ana Felisatti</name>
+        </developer>
+        <developer>
+            <id>alegmarra</id>
+            <name>Alejandro Garcia Marra</name>
+        </developer>
+        <developer>
+            <id>anosenzo</id>
+            <name>Alejandro Nosenzo</name>
+        </developer>
+        <developer>
+            <id>elrodro83</id>
+            <name>Rodrigo Merino</name>
+        </developer>
+        <developer>
+            <id>estebanwasinger</id>
+            <name>Esteban Wasinger Espro</name>
+        </developer>
+        <developer>
+            <id>fsgonz</id>
+            <name>Fabian Gonzalez</name>
+        </developer>
+        <developer>
+            <id>gsfernandes</id>
+            <name>Guillermo Fernandes</name>
+        </developer>
+        <developer>
+            <id>juandesi</id>
+            <name>Juan Desimoni</name>
+        </developer>
+        <developer>
+            <id>lucianoRM</id>
+            <name>Luciano Raineri</name>
+        </developer>
+        <developer>
+            <id>marianogonzalez</id>
+            <name>Mariano Gonzalez</name>
+        </developer>
+        <developer>
+            <id>mbuchwald</id>
+            <name>Martin Buchwald</name>
+        </developer>
+        <developer>
+            <id>ndinu</id>
+            <name>Nicolas Di Nucci</name>
+        </developer>
+        <developer>
+            <id>pablolagreca</id>
+            <name>Pablo La Greca</name>
+        </developer>
+    </developers>
+    <contributors>
+        <!-- Refer to https://github.com/mulesoft/mule/graphs/contributors -->
+    </contributors>
+    <issueManagement>
+        <system>jira</system>
+        <url>http://www.mulesoft.org/jira/browse/MULE</url>
+    </issueManagement>
+
+    <scm>
+        <connection>scm:git:git://github.com/mulesoft/mule-extensions-archetype.git</connection>
+        <developerConnection>scm:git:git@github.com:mulesoft/mule-extensions-archetype.git</developerConnection>
+        <url>https://github.com/mulesoft/mule-extensions-archetype</url>
+    </scm>
+
+
 
     <modules>
         <module>mule-extensions-archetype</module>
