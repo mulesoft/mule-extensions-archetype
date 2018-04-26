@@ -40,7 +40,6 @@ updateExtensionsArchetypeVersionConstant(){
 
 
 VERSION_TO_EXTENSIONS_ARCHETYPE=$1
-VERSION_TO_MULE_MODULES_PARENT=$2
 
 updateExtensionsArchetypeVersionConstant "$VERSION_TO_EXTENSIONS_ARCHETYPE" mule-extension-archetype-maven-plugin/src/main/java/org/mule/extensions/archetype/ArchetypeConstants.java
-updateParentVersion "$VERSION_TO_MULE_MODULES_PARENT" mule-extensions-archetype/src/main/resources/archetype-resources/pom.xml
+mvn versions:set versions:commit -DnewVersion="${VERSION_TO_EXTENSIONS_ARCHETYPE}"
