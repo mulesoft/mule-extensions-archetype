@@ -30,3 +30,26 @@ mvn archetype:generate -DarchetypeGroupId=org.mule.extensions
 
 This is more tedious and we worked to make your life easier :), use the maven plugin.
 
+
+## Smart Connector Archetype
+
+Similarly to the previous example, a smart connector can be done by using the following archetype
+```
+mvn archetype:generate                               \
+  -DarchetypeGroupId=org.mule.extensions             \
+  -DarchetypeArtifactId=mule-extensions-xml-archetype
+``` 
+If you want to disable the interactive mode, just use the following
+```
+mvn archetype:generate                                  \
+  -DarchetypeGroupId=org.mule.extensions                \
+  -DarchetypeArtifactId=mule-extensions-xml-archetype   \
+  -DarchetypeVersion=1.2.0-SNAPSHOT                     \
+  -DgroupId=org.mule.smart.connector.example            \
+  -DartifactId=example-smart-connector                  \
+  -Dpackage=org.mule.smart.connector.example            \
+  -Dversion=1.0.0-SNAPSHOT                              \  
+  -DmuleConnectorName=Example
+``` 
+
+
