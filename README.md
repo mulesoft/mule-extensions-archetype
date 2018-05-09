@@ -48,8 +48,27 @@ mvn archetype:generate                                  \
   -DgroupId=org.mule.smart.connector.example            \
   -DartifactId=example-smart-connector                  \
   -Dpackage=org.mule.smart.connector.example            \
-  -Dversion=1.0.0-SNAPSHOT                              \  
+  -Dversion=1.0.0-SNAPSHOT                              \
   -DmuleConnectorName=Example
 ``` 
+
+The generated structure after the previous sample will be:
+```
+example-smart-connector
+├── pom.xml
+└── src
+    ├── main
+    │   └── resources
+    │       └── org
+    │           └── mule
+    │               └── smart
+    │                   └── connector
+    │                       └── example
+    │                           └── module-Hello.xml
+    └── test
+        └── munit
+            └── assertion-munit-test.xml
+```
+Where `module-Hello.xml` will contain the XML of the Smart Connector and `assertion-munit-test.xml` will contain the assertions to validate the operations of the Smart Connector
 
 
