@@ -120,6 +120,7 @@
         <module>mule-extensions-archetype</module>
         <module>mule-extension-archetype-maven-plugin</module>
         <module>mule-extensions-archetype-it</module>
+        <module>mule-extensions-xml-archetype</module>
     </modules>
 
     <properties>
