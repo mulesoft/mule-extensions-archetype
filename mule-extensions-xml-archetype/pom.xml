@@ -14,6 +14,34 @@
     <name>Smart Connector Archetype</name>
 
     <build>
+        <plugins>
+            <plugin>
+                <groupId>com.google.code.maven-replacer-plugin</groupId>
+                <artifactId>replacer</artifactId>
+                <version>${maven.replacer.plugin}</version>
+                <executions>
+                    <execution>
+                        <phase>test-compile</phase>
+                        <goals>
+                            <goal>replace</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <basedir>${project.build.directory}/test-classes/projects</basedir>
+                    <includes>
+                        <include>**/goal.txt</include>
+                    </includes>
+                    <replacements>
+                        <replacement>
+                            <token>%XML_ARCHETYPE_TESTS_SETTINGS_PLACEHOLDER%</token>
+                            <value>--settings ${mule.extension.archetype.testSettings}</value>
+                        </replacement>
+                    </replacements>
+                </configuration>
+            </plugin>
+        </plugins>
+
         <extensions>
             <extension>
                 <groupId>org.apache.maven.archetype</groupId>
