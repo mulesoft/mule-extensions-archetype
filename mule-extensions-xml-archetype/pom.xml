@@ -14,34 +14,6 @@
     <name>Smart Connector Archetype</name>
 
     <build>
-        <plugins>
-            <plugin>
-                <groupId>com.google.code.maven-replacer-plugin</groupId>
-                <artifactId>replacer</artifactId>
-                <version>${maven.replacer.plugin}</version>
-                <executions>
-                    <execution>
-                        <phase>test-compile</phase>
-                        <goals>
-                            <goal>replace</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <basedir>${project.build.directory}/test-classes/projects</basedir>
-                    <includes>
-                        <include>**/goal.txt</include>
-                    </includes>
-                    <replacements>
-                        <replacement>
-                            <token>%XML_ARCHETYPE_TESTS_SETTINGS_PLACEHOLDER%</token>
-                            <value>--settings ${mule.extension.archetype.testSettings}</value>
-                        </replacement>
-                    </replacements>
-                </configuration>
-            </plugin>
-        </plugins>
-
         <extensions>
             <extension>
                 <groupId>org.apache.maven.archetype</groupId>
@@ -58,6 +30,80 @@
                 </plugin>
             </plugins>
         </pluginManagement>
+
+        <!-- When it is not running on a CI Environment the goal in the tests shouldn't include a custom setting.xml -->
+        <!-- So %XML_ARCHETYPE_TESTS_SETTINGS_PLACEHOLDER% should be deleted in the goal.txt files -->
+        <plugins>
+            <plugin>
+                <groupId>com.google.code.maven-replacer-plugin</groupId>
+                <artifactId>replacer</artifactId>
+                <version>${maven.replacer.plugin}</version>
+                <executions>
+                    <execution>
+                        <id>add-custom-settings-file</id>
+                        <phase>test-compile</phase>
+                        <goals>
+                            <goal>replace</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <basedir>${project.build.directory}/test-classes/projects</basedir>
+                    <includes>
+                        <include>**/goal.txt</include>
+                    </includes>
+                    <replacements>
+                        <replacement>
+                            <token>%XML_ARCHETYPE_TESTS_SETTINGS_PLACEHOLDER%</token>
+                            <value></value>
+                        </replacement>
+                    </replacements>
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <!-- When it is running on a CI Environment the goal in the tests should include a custom setting.xml to be able to download the deps-->
+            <!-- So %XML_ARCHETYPE_TESTS_SETTINGS_PLACEHOLDER% should be replaced in the goal.txt files with the custom settings.xml-->
+            <id>ci-environment</id>
+            <activation>
+                <property>
+                    <name>mule.extension.archetype.testSettings</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.google.code.maven-replacer-plugin</groupId>
+                        <artifactId>replacer</artifactId>
+                        <version>${maven.replacer.plugin}</version>
+                        <executions>
+                            <execution>
+                                <id>add-custom-settings-file</id>
+                                <phase>test-compile</phase>
+                                <goals>
+                                    <goal>replace</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <basedir>${project.build.directory}/test-classes/projects</basedir>
+                            <includes>
+                                <include>**/goal.txt</include>
+                            </includes>
+                            <replacements>
+                                <replacement>
+                                    <token>%XML_ARCHETYPE_TESTS_SETTINGS_PLACEHOLDER%</token>
+                                    <value>--settings ${mule.extension.archetype.testSettings}</value>
+                                </replacement>
+                            </replacements>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
 </project>
