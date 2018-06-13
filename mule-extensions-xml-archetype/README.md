@@ -41,5 +41,9 @@ Current assertions in this module for Smart Connectors archetypes assert two thi
 * b) the generated `<module>` has the same structure and *content* as the folder inside the `src/test/resources/projects/<name>/reference`. This allows to determine the generated file respects both structure and content for the entire `<module>` project.
 
 
+What about if I want to skip the tests? run the following command 
+`mvn clean install -Darchetype.test.skip=true`
+
+
 
  
