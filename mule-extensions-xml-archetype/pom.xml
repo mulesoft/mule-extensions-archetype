@@ -89,6 +89,7 @@
                             </execution>
                         </executions>
                         <configuration>
+                            <regex>false</regex>
                             <basedir>${project.build.directory}/test-classes/projects</basedir>
                             <includes>
                                 <include>**/goal.txt</include>
