@@ -152,6 +152,7 @@
                 "password": false,
                 "text": false,
                 "query": false,
+                "order": 2,
                 "tabName": "Advanced"
               },
               "allowedStereotypeModels": [],
@@ -210,10 +211,11 @@
           "transactional": false,
           "requiresConnection": true,
           "supportsStreaming": false,
+          "notifications": [],
           "nestedComponents": [],
           "errors": [
-            "MY-PEPE:RETRY_EXHAUSTED",
-            "MY-PEPE:CONNECTIVITY"
+            "MY-PEPE:CONNECTIVITY",
+            "MY-PEPE:RETRY_EXHAUSTED"
           ],
           "stereotype": {
             "type": "PROCESSOR",
@@ -283,6 +285,7 @@
                     "password": false,
                     "text": false,
                     "query": false,
+                    "order": 2,
                     "tabName": "Advanced"
                   },
                   "allowedStereotypeModels": [],
@@ -313,6 +316,7 @@
                     "password": false,
                     "text": false,
                     "query": false,
+                    "order": 3,
                     "tabName": "Advanced"
                   },
                   "allowedStereotypeModels": [],
@@ -325,6 +329,12 @@
                 }
               ],
               "exclusiveParametersModels": [],
+              "layoutModel": {
+                "password": false,
+                "text": false,
+                "query": false,
+                "order": 2
+              },
               "showInDsl": false,
               "name": "Output",
               "description": "",
@@ -451,6 +461,7 @@
                     "password": false,
                     "text": false,
                     "query": false,
+                    "order": 4,
                     "tabName": "Advanced"
                   },
                   "allowedStereotypeModels": [],
@@ -471,6 +482,12 @@
                 }
               ],
               "exclusiveParametersModels": [],
+              "layoutModel": {
+                "password": false,
+                "text": false,
+                "query": false,
+                "order": 3
+              },
               "showInDsl": false,
               "name": "Connection",
               "description": "",
@@ -738,6 +755,7 @@
                     "password": false,
                     "text": false,
                     "query": false,
+                    "order": 3,
                     "tabName": "Advanced"
                   },
                   "allowedStereotypeModels": [],
@@ -946,6 +964,7 @@
                     "password": false,
                     "text": false,
                     "query": false,
+                    "order": 4,
                     "tabName": "Advanced"
                   },
                   "allowedStereotypeModels": [],
@@ -966,6 +985,12 @@
                 }
               ],
               "exclusiveParametersModels": [],
+              "layoutModel": {
+                "password": false,
+                "text": false,
+                "query": false,
+                "order": 2
+              },
               "showInDsl": false,
               "name": "Connection",
               "description": "",
@@ -1008,6 +1033,7 @@
       "transactional": false,
       "requiresConnection": false,
       "supportsStreaming": false,
+      "notifications": [],
       "nestedComponents": [],
       "errors": [],
       "stereotype": {
@@ -1104,6 +1130,7 @@
                 "password": false,
                 "text": false,
                 "query": false,
+                "order": 3,
                 "tabName": "Advanced"
               },
               "allowedStereotypeModels": [],
@@ -1134,6 +1161,7 @@
                 "password": false,
                 "text": false,
                 "query": false,
+                "order": 4,
                 "tabName": "Advanced"
               },
               "allowedStereotypeModels": [],
@@ -1146,6 +1174,12 @@
             }
           ],
           "exclusiveParametersModels": [],
+          "layoutModel": {
+            "password": false,
+            "text": false,
+            "query": false,
+            "order": 2
+          },
           "showInDsl": false,
           "name": "Output",
           "description": "",
@@ -1162,25 +1196,31 @@
   "constructs": [],
   "connectionProviders": [],
   "messageSources": [],
+  "notifications": [],
   "errors": [
     {
-      "error": "MULE:CONNECTIVITY",
-      "parent": "MULE:ANY"
+      "error": "MY-PEPE:CONNECTIVITY",
+      "parent": "MULE:CONNECTIVITY",
+      "handleable": true
     },
     {
-      "error": "MULE:ANY"
+      "error": "MULE:CONNECTIVITY",
+      "parent": "MULE:ANY",
+      "handleable": true
+    },
+    {
+      "error": "MULE:ANY",
+      "handleable": true
     },
     {
       "error": "MULE:RETRY_EXHAUSTED",
-      "parent": "MULE:ANY"
+      "parent": "MULE:ANY",
+      "handleable": true
     },
     {
       "error": "MY-PEPE:RETRY_EXHAUSTED",
-      "parent": "MULE:RETRY_EXHAUSTED"
-    },
-    {
-      "error": "MY-PEPE:CONNECTIVITY",
-      "parent": "MULE:CONNECTIVITY"
+      "parent": "MULE:RETRY_EXHAUSTED",
+      "handleable": true
     }
   ],
   "modelProperties": {},
