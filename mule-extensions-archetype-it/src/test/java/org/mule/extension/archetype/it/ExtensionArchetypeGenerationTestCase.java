@@ -93,7 +93,7 @@ public class ExtensionArchetypeGenerationTestCase {
 
     if (System.getProperty(MAVEN_SETTINGS_PROPERTY) != null) {
       List cliProps = new ArrayList<String>();
-      cliProps.add("-s -X " + System.getProperty(MAVEN_SETTINGS_PROPERTY, (String) null));
+      cliProps.add("-X -s " + System.getProperty(MAVEN_SETTINGS_PROPERTY, (String) null));
       verifier.setCliOptions(cliProps);
     }
     verifier.addCliOption("-DskipDocumentation");
