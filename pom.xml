@@ -131,8 +131,8 @@
         <javaFormatter.plugin.version>1.9.0</javaFormatter.plugin.version>
         <maven.surefire.plugin.version>2.20.1</maven.surefire.plugin.version>
         <aspectjVersion>1.9.2</aspectjVersion>
-        <allureJunitVersion>2.6.0</allureJunitVersion>
-        <allureReportVersion>2.6.0</allureReportVersion>
+        <allureJunitVersion>2.8.1</allureJunitVersion>
+        <allureReportVersion>2.8.1</allureReportVersion>
         <allure.maven.plugin.version>2.9</allure.maven.plugin.version>
         <jacoco.version>0.8.2</jacoco.version>
         <maven.enforcer.plugin.version>1.4.1</maven.enforcer.plugin.version>
