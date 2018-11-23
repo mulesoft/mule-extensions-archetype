@@ -137,6 +137,7 @@
         <jacoco.version>0.8.2</jacoco.version>
         <maven.enforcer.plugin.version>1.4.1</maven.enforcer.plugin.version>
         <maven.replacer.plugin>1.5.3</maven.replacer.plugin>
+        <mule.extension.archetype.testSettings>${java.io.tmpdir}/effective-settings.xml</mule.extension.archetype.testSettings>
     </properties>
 
     <build>
@@ -206,6 +207,7 @@
                             </property>
                         </systemProperties>
                         <systemPropertyVariables>
+                            <mule.extension.archetype.testSettings>${mule.extension.archetype.testSettings}</mule.extension.archetype.testSettings>
                             <argLine>-javaagent:${settings.localRepository}/org/jacoco/org.jacoco.agent/${jacoco.version}/org.jacoco.agent-${jacoco.version}-runtime.jar=destfile=${session.executionRootDirectory}/target/jacoco-it.exec</argLine>
                         </systemPropertyVariables>
                     </configuration>
@@ -234,6 +236,23 @@
             </plugins>
         </pluginManagement>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-help-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>process-test-resources</phase>
+                        <id>copy-settings</id>
+                        <goals>
+                            <goal>effective-settings</goal>
+                        </goals>
+                        <configuration>
+                            <output>${mule.extension.archetype.testSettings}</output>
+                            <showPasswords>true</showPasswords>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>io.qameta.allure</groupId>
                 <artifactId>allure-maven</artifactId>
