@@ -14,25 +14,6 @@
     <name>Smart Connector Archetype</name>
 
     <build>
-        <testResources>
-            <testResource>
-                <directory>${basedir}/src/test/resources</directory>
-                <filtering>true</filtering>
-                <includes>
-                    <include>**/goal.txt</include>
-                </includes>
-            </testResource>
-            <testResource>
-                <directory>${basedir}/src/test/resources</directory>
-                <filtering>false</filtering>
-                <includes>
-                    <include>**</include>
-                </includes>
-                <excludes>
-                    <exclude>**/goal.txt</exclude>
-                </excludes>
-            </testResource>
-        </testResources>
         <extensions>
             <extension>
                 <groupId>org.apache.maven.archetype</groupId>
@@ -46,6 +27,9 @@
                 <plugin>
                     <artifactId>maven-archetype-plugin</artifactId>
                     <version>3.0.1</version>
+                    <configuration>
+                        <settingsFile>${mule.extension.archetype.testSettings}</settingsFile>
+                    </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>

@@ -136,7 +136,6 @@
         <allure.maven.plugin.version>2.9</allure.maven.plugin.version>
         <jacoco.version>0.8.2</jacoco.version>
         <maven.enforcer.plugin.version>1.4.1</maven.enforcer.plugin.version>
-        <maven.replacer.plugin>1.5.3</maven.replacer.plugin>
         <mule.extension.archetype.testSettings>${java.io.tmpdir}/effective-settings.xml</mule.extension.archetype.testSettings>
     </properties>
 
