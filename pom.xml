@@ -368,7 +368,7 @@
                                             </unCheckedPluginList>
                                         </requirePluginVersions>
                                     </rules>
-                                    <!--<skip>${skipNoSnapshotsEnforcerPluginRule}</skip>-->
+                                    <skip>${skipNoSnapshotsEnforcerPluginRule}</skip>
                                 </configuration>
                             </execution>
                         </executions>
