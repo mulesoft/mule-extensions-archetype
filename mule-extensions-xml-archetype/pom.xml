@@ -11,7 +11,7 @@
     <artifactId>mule-extensions-xml-archetype</artifactId>
     <packaging>maven-archetype</packaging>
     
-    <name>Smart Connector Archetype</name>
+    <name>Mule Extensions XML Archetype</name>
 
     <build>
         <extensions>

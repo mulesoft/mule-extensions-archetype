@@ -7,9 +7,9 @@ If we name our connector `basic` with the following script,
 mvn archetype:generate                                  \
   -DarchetypeGroupId=org.mule.extensions                \
   -DarchetypeArtifactId=mule-extensions-xml-archetype   \
-  -DarchetypeVersion=1.2.0-SNAPSHOT                     \
+  -DarchetypeVersion=1.2.0                              \
   -DgroupId=org.mule.extension.it.basic                 \
-  -DartifactId=module-basic-it                  \
+  -DartifactId=module-basic-it                          \
   -Dpackage=org.mule.extension.it.basic                 \
   -Dversion=0.1.0-SNAPSHOT                              \  
   -DmuleConnectorName=Basic

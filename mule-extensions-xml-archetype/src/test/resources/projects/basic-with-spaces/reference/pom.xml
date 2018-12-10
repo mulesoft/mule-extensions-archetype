@@ -13,10 +13,10 @@
 
     <properties>
         <mule.version>4.1.1</mule.version>
-        <mule.extensions.maven.plugin.version>1.2.0-SNAPSHOT</mule.extensions.maven.plugin.version>
+        <mule.extensions.maven.plugin.version>1.1.6</mule.extensions.maven.plugin.version>
 
         <munit.version>2.1.0</munit.version>
-        <munit.extensions.maven.plugin.version>1.0.0-SNAPSHOT</munit.extensions.maven.plugin.version>
+        <munit.extensions.maven.plugin.version>1.0.0-BETA</munit.extensions.maven.plugin.version>
         <munit.input.directory>src/test/munit</munit.input.directory>
         <munit.output.directory>${basedir}/target/test-mule/munit</munit.output.directory>
 
