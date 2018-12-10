@@ -114,8 +114,6 @@
         <url>https://github.com/mulesoft/mule-extensions-archetype</url>
     </scm>
 
-
-
     <modules>
         <module>mule-extensions-archetype</module>
         <module>mule-extension-archetype-maven-plugin</module>
@@ -238,6 +236,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-help-plugin</artifactId>
+                <version>3.1.0</version>
                 <executions>
                     <execution>
                         <phase>process-test-resources</phase>
@@ -369,7 +368,7 @@
                                             </unCheckedPluginList>
                                         </requirePluginVersions>
                                     </rules>
-                                    <skip>${skipNoSnapshotsEnforcerPluginRule}</skip>
+                                    <!--<skip>${skipNoSnapshotsEnforcerPluginRule}</skip>-->
                                 </configuration>
                             </execution>
                         </executions>
