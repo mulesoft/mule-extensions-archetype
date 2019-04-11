@@ -152,7 +152,7 @@ public class ExtensionArchetypeGenerationTestCase {
   }
 
   private static Properties getPluginProperties() {
-    Properties props = System.getProperties();
+    Properties props = new Properties();
 
     // Archetype plugin properties
     props.put(ARCHETYPE_GID_PROP, EXTENSIONS_ARCHETYPE_GID);
