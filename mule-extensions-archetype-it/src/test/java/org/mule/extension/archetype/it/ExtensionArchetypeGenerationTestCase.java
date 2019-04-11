@@ -90,7 +90,7 @@ public class ExtensionArchetypeGenerationTestCase {
   }
 
   private static Properties getProperties() {
-    Properties props = System.getProperties();
+    Properties props = new Properties();
 
     props.setProperty("maven.repo.remote", "https://repository-master.mulesoft.org/nexus/content/repositories/snapshots,https://repository-master.mulesoft.org/nexus/content/repositories/releases");
 
