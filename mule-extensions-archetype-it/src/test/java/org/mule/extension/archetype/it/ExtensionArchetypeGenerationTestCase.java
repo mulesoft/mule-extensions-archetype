@@ -9,17 +9,17 @@ package org.mule.extension.archetype.it;
 
 import static java.lang.Boolean.FALSE;
 import static java.lang.System.getProperty;
-import static org.mule.extensions.archetype.ArchetypeConstants.ARCHETYPE_INTERACTIVE_MODE_PROP;
-import static org.mule.extensions.archetype.ArchetypeConstants.EXTENSIONS_ARCHETYPE_AID;
 import static org.mule.extensions.archetype.ArchetypeConstants.ARCHETYPE_AID_PROP;
-import static org.mule.extensions.archetype.ArchetypeConstants.EXTENSIONS_ARCHETYPE_GID;
 import static org.mule.extensions.archetype.ArchetypeConstants.ARCHETYPE_GID_PROP;
-import static org.mule.extensions.archetype.ArchetypeConstants.EXTENSIONS_ARCHETYPE_VERSION;
+import static org.mule.extensions.archetype.ArchetypeConstants.ARCHETYPE_INTERACTIVE_MODE_PROP;
 import static org.mule.extensions.archetype.ArchetypeConstants.ARCHETYPE_VERSION_PROP;
 import static org.mule.extensions.archetype.ArchetypeConstants.ARTIFACT_ID;
+import static org.mule.extensions.archetype.ArchetypeConstants.EXTENSIONS_ARCHETYPE_AID;
+import static org.mule.extensions.archetype.ArchetypeConstants.EXTENSIONS_ARCHETYPE_GID;
+import static org.mule.extensions.archetype.ArchetypeConstants.EXTENSIONS_ARCHETYPE_VERSION;
 import static org.mule.extensions.archetype.ArchetypeConstants.EXTENSION_NAME;
-import static org.mule.extensions.archetype.ArchetypeConstants.GROUP_ID;
 import static org.mule.extensions.archetype.ArchetypeConstants.EXTENSION_VERSION;
+import static org.mule.extensions.archetype.ArchetypeConstants.GROUP_ID;
 import static org.mule.extensions.archetype.ArchetypeConstants.PACKAGE;
 
 import java.io.File;
@@ -27,7 +27,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.Properties;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.maven.it.VerificationException;
 import org.apache.maven.it.Verifier;
@@ -79,9 +82,10 @@ public class ExtensionArchetypeGenerationTestCase {
     // Since creating the archetype was successful, we now want to actually build the generated project
     verifier = new Verifier(ROOT.getAbsolutePath() + "/" + TEST_EXTENSION_AID);
 
-    if(System.getProperty(MAVEN_SETTINGS_PROPERTY) != null){
+    Optional<String> mavenSettingsFile = getMavenSettingsFile();
+    if (mavenSettingsFile.isPresent() && new File(mavenSettingsFile.get()).exists()) {
       List cliProps = new ArrayList<String>();
-      cliProps.add("-s " + System.getProperty(MAVEN_SETTINGS_PROPERTY, (String) null));
+      cliProps.add("-s " + mavenSettingsFile.get());
       verifier.setCliOptions(cliProps);
     }
     verifier.setMavenDebug(true);
@@ -108,5 +112,18 @@ public class ExtensionArchetypeGenerationTestCase {
     props.put(PACKAGE, TEST_EXTENSION_PACKAGE);
 
     return props;
+  }
+
+  private Optional<String> getMavenSettingsFile() {
+    Optional<String> mavenSettingsFile = Optional.ofNullable(getProperty(MAVEN_SETTINGS_PROPERTY));
+    Pattern pattern = Pattern.compile("\\$\\{(.*)\\}");
+    Matcher matcher = pattern.matcher(mavenSettingsFile.orElse(""));
+
+    while (matcher.find()) {
+      mavenSettingsFile = Optional.ofNullable(getProperty(matcher.group(1)));
+      matcher = pattern.matcher(mavenSettingsFile.orElse(""));
+    }
+
+    return mavenSettingsFile;
   }
 }
