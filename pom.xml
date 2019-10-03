@@ -128,7 +128,7 @@
         <jdk.version>1.8</jdk.version>
         <mavenCompilerVersion>3.7.0</mavenCompilerVersion>
         <javaFormatter.plugin.version>1.9.0</javaFormatter.plugin.version>
-        <maven.surefire.plugin.version>2.20.1</maven.surefire.plugin.version>
+        <maven.surefire.plugin.version>2.22.2</maven.surefire.plugin.version>
         <aspectjVersion>1.8.10</aspectjVersion>
         <allureJunitVersion>2.8.1</allureJunitVersion>
         <allureReportVersion>2.8.1</allureReportVersion>
