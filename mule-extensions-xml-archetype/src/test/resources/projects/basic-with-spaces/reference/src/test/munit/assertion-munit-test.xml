@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xmlns:module-basic-with-spaces="http://www.mulesoft.org/schema/mule/module-basic-with-spaces"
+      xmlns:basic-with-spaces="http://www.mulesoft.org/schema/mule/basic-with-spaces"
 
       xmlns:munit="http://www.mulesoft.org/schema/mule/munit"
       xmlns:munitext="http://www.mulesoft.org/schema/mule/munit-tools"
@@ -8,7 +8,7 @@
       xsi:schemaLocation="
         http://www.mulesoft.org/schema/mule/core      http://www.mulesoft.org/schema/mule/core/current/mule.xsd
         http://www.mulesoft.org/schema/mule/munit     http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
-        http://www.mulesoft.org/schema/mule/module-basic-with-spaces http://www.mulesoft.org/schema/mule/module-basic-with-spaces/current/mule-module-basic-with-spaces.xsd
+        http://www.mulesoft.org/schema/mule/basic-with-spaces http://www.mulesoft.org/schema/mule/basic-with-spaces/current/mule-basic-with-spaces.xsd
         http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
 
     <munit:config name="assertion-test.xml"/>
@@ -32,10 +32,10 @@
     </munit:test>
 
     <flow name="set-payload-hardcoded-flow">
-        <module-basic-with-spaces:set-payload-hardcoded/>
+        <basic-with-spaces:set-payload-hardcoded/>
     </flow>
 
     <flow name="set-payload-hardcoded-two-times-flow">
-        <module-basic-with-spaces:set-payload-hardcoded-two-times/>
+        <basic-with-spaces:set-payload-hardcoded-two-times/>
     </flow>
 </mule>
