@@ -125,7 +125,7 @@
         <formatterConfigPath>formatter.xml</formatterConfigPath>
         <formatterGoal>validate</formatterGoal>
         <jdk.version>1.8</jdk.version>
-        <mavenCompilerVersion>3.7.0</mavenCompilerVersion>
+        <mavenCompilerVersion>3.8.1</mavenCompilerVersion>
         <javaFormatter.plugin.version>1.9.0</javaFormatter.plugin.version>
         <maven.surefire.plugin.version>2.22.2</maven.surefire.plugin.version>
         <aspectjVersion>1.9.2</aspectjVersion>
@@ -146,17 +146,9 @@
                     <version>${mavenCompilerVersion}</version>
                     <configuration>
                         <encoding>ISO-8859-1</encoding>
-                        <fork>true</fork>
-                        <maxmem>512m</maxmem>
                         <source>${jdk.version}</source>
                         <target>${jdk.version}</target>
                         <proc>none</proc>
-                        <!-- Slightly faster builds, see https://jira.codehaus.org/browse/MCOMPILER-209 -->
-                        <useIncrementalCompilation>false</useIncrementalCompilation>
-                        <compilerArgs>
-                            <arg>-parameters</arg>
-                        </compilerArgs>
-                        <testCompilerArgument>-parameters</testCompilerArgument>
                     </configuration>
                 </plugin>
                 <plugin>
