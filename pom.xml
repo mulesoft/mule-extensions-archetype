@@ -149,6 +149,7 @@
                         <source>${jdk.version}</source>
                         <target>${jdk.version}</target>
                         <proc>none</proc>
+                        <parameters>true</parameters>
                     </configuration>
                 </plugin>
                 <plugin>
