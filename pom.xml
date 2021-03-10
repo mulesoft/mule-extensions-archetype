@@ -124,9 +124,10 @@
     <properties>
         <formatterConfigPath>formatter.xml</formatterConfigPath>
         <formatterGoal>validate</formatterGoal>
+        <skipVerifications>false</skipVerifications>
         <jdk.version>1.8</jdk.version>
         <mavenCompilerVersion>3.8.1</mavenCompilerVersion>
-        <javaFormatter.plugin.version>1.9.0</javaFormatter.plugin.version>
+        <javaFormatter.plugin.version>2.14.0</javaFormatter.plugin.version>
         <maven.surefire.plugin.version>2.22.2</maven.surefire.plugin.version>
         <aspectjVersion>1.9.2</aspectjVersion>
         <allureJunitVersion>2.8.1</allureJunitVersion>
@@ -153,7 +154,7 @@
                     </configuration>
                 </plugin>
                 <plugin>
-                    <groupId>com.marvinformatics.formatter</groupId>
+                    <groupId>net.revelc.code.formatter</groupId>
                     <artifactId>formatter-maven-plugin</artifactId>
                     <version>${javaFormatter.plugin.version}</version>
                     <configuration>
@@ -167,13 +168,12 @@
                     </configuration>
                     <executions>
                         <execution>
-                            <id>apply-format</id>
                             <phase>compile</phase>
                             <goals>
                                 <goal>${formatterGoal}</goal>
                             </goals>
                             <configuration>
-                                <skipFormatting>false</skipFormatting>
+                                <skipFormatting>${skipVerifications}</skipFormatting>
                             </configuration>
                         </execution>
                     </executions>
