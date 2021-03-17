@@ -1,5 +1,3 @@
 upstreamProjects:
   Mule-runtime/mule/mule-4.x
-mavenCompileGoal: package -DskipTests -Darchetype.test.skip
-mavenTestGoal: install
 projectType: runtime
