@@ -1,7 +1,7 @@
 #set( $symbol_pound = '#' )
 #set( $symbol_dollar = '$' )
 #set( $symbol_escape = '\' )
-#set( $hyphenated_module_name = "module-${extensionName.toLowerCase().replace(' ', '-')}" )
+#set( $hyphenated_module_name = "${extensionName.toLowerCase().replace(' ', '-')}" )
 <?xml version="1.0" encoding="UTF-8"?>
 <mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xmlns:${hyphenated_module_name}="http://www.mulesoft.org/schema/mule/${hyphenated_module_name}"
