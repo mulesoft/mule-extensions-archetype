@@ -1,7 +1,35 @@
-.idea/
-target/
-*.iml
 
+# Maven
+target/
+**/dependency-reduced-pom.xml
+
+# Eclipse files
+.classpath
+.project
+.settings
+/workspace/
+
+# IntelliJ Idea files
+*.iml
+*.ipr
+*.iws
+*.idea
+*.mule_ide/
 
 # Mac
 .DS_Store
+
+# Test remnants
+objectstore/
+.mule/
+*.log
+temp/
+muleEmbeddedDB/
+activemq-data/
+testdir/
+hostkey.ser
+*.h2.db
+*.factorypath
+
+# Manifest
+src/main/resources/META-INF/MANIFEST.MF
