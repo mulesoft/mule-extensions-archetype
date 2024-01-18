@@ -12,11 +12,12 @@
 
 
     <properties>
-        <mule.version>4.1.1</mule.version>
-        <mule.extensions.maven.plugin.version>1.1.6</mule.extensions.maven.plugin.version>
+        <mule.version>4.6.0-SNAPSHOT</mule.version>
+        <mule.impl.version>4.6.0-SNAPSHOT</mule.impl.version>
+        <mule.extensions.maven.plugin.version>1.6.0-SNAPSHOT</mule.extensions.maven.plugin.version>
 
-        <munit.version>2.1.3</munit.version>
-        <munit.extensions.maven.plugin.version>1.1.1</munit.extensions.maven.plugin.version>
+        <munit.version>2.4.0-SNAPSHOT</munit.version>
+        <munit.extensions.maven.plugin.version>1.1.3</munit.extensions.maven.plugin.version>
         <munit.input.directory>src/test/munit</munit.input.directory>
         <munit.output.directory>${basedir}/target/test-mule/munit</munit.output.directory>
 
@@ -86,7 +87,7 @@
         <dependency>
             <groupId>org.mule.runtime</groupId>
             <artifactId>mule-module-extensions-xml-support</artifactId>
-            <version>${mule.version}</version>
+            <version>${mule.impl.version}</version>
             <scope>provided</scope>
         </dependency>
         <!--MUnit Dependencies-->
@@ -123,6 +124,21 @@
                             <MY_ENV>envVar</MY_ENV>
                         </environmentVariables>
                     </configuration>
+                    <dependencies>
+                        <!-- MUnit Dependencies -->
+                        <dependency>
+                            <groupId>com.mulesoft.munit</groupId>
+                            <artifactId>munit-runner</artifactId>
+                            <version>${munit.version}</version>
+                            <classifier>mule-plugin</classifier>
+                        </dependency>
+                        <dependency>
+                            <groupId>com.mulesoft.munit</groupId>
+                            <artifactId>munit-tools</artifactId>
+                            <version>${munit.version}</version>
+                            <classifier>mule-plugin</classifier>
+                        </dependency>
+                    </dependencies>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>

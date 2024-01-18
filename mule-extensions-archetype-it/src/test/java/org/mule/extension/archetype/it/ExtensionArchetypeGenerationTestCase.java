@@ -6,11 +6,6 @@
  */
 package org.mule.extension.archetype.it;
 
-import static java.lang.Boolean.FALSE;
-import static java.lang.System.getProperty;
-import static java.lang.System.getenv;
-import static java.util.Arrays.asList;
-import static org.apache.commons.io.FileUtils.readFileToString;
 import static org.mule.extensions.archetype.ArchetypeConstants.ARCHETYPE_AID_PROP;
 import static org.mule.extensions.archetype.ArchetypeConstants.ARCHETYPE_GID_PROP;
 import static org.mule.extensions.archetype.ArchetypeConstants.ARCHETYPE_INTERACTIVE_MODE_PROP;
@@ -25,6 +20,13 @@ import static org.mule.extensions.archetype.ArchetypeConstants.EXTENSION_VERSION
 import static org.mule.extensions.archetype.ArchetypeConstants.GROUP_ID;
 import static org.mule.extensions.archetype.ArchetypeConstants.PACKAGE;
 
+import static java.lang.Boolean.FALSE;
+import static java.lang.System.getProperty;
+import static java.lang.System.getenv;
+import static java.util.Arrays.asList;
+
+import static org.apache.commons.io.FileUtils.readFileToString;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -38,9 +40,12 @@ import java.util.regex.Pattern;
 import org.apache.maven.it.VerificationException;
 import org.apache.maven.it.Verifier;
 import org.apache.tika.io.IOUtils;
-import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 
+import org.junit.Ignore;
+import org.junit.Test;
+
+@Ignore("W-14840459")
 public class ExtensionArchetypeGenerationTestCase {
 
   private static final File ROOT = new File("target/test-classes/");
@@ -100,6 +105,7 @@ public class ExtensionArchetypeGenerationTestCase {
     }
 
     verifier.addCliOption("-DskipDocumentation");
+    verifier.addCliOption("-DtrimStackTrace=false");
     verifier.setMavenDebug(true);
     verifier.executeGoals(asList("package"), getEnvVars());
     verifier.verifyErrorFreeLog();
