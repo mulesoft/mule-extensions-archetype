@@ -13,6 +13,10 @@
     
     <name>Mule Extensions XML Archetype</name>
 
+    <properties>
+        <skipXmlSdkTests>false</skipXmlSdkTests>
+    </properties>
+
     <build>
         <extensions>
             <extension>
@@ -28,11 +32,25 @@
                     <artifactId>maven-archetype-plugin</artifactId>
                     <version>3.0.1</version>
                     <configuration>
+                        <skip>${skipXmlSdkTests}</skip>
                         <settingsFile>${mule.extension.archetype.testSettings}</settingsFile>
                     </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>
     </build>
+    
+    <profiles>
+        <profile>
+            <!-- TODO W-14854013: Remove this profile -->
+            <id>skipXmlSdkTests</id>
+            <activation>
+                <jdk>[17,)</jdk>
+            </activation>
+            <properties>
+                <skipXmlSdkTests>true</skipXmlSdkTests>
+            </properties>
+        </profile>
+    </profiles>
 
 </project>
