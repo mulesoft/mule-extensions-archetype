@@ -32,7 +32,7 @@
                     <artifactId>maven-archetype-plugin</artifactId>
                     <version>3.0.1</version>
                     <configuration>
-                        <skip>${skipXmlSdkTests}</skip>
+                        <skip>${skipTests}</skip>
                         <settingsFile>${mule.extension.archetype.testSettings}</settingsFile>
                     </configuration>
                 </plugin>
@@ -48,7 +48,7 @@
                 <jdk>[17,)</jdk>
             </activation>
             <properties>
-                <skipXmlSdkTests>true</skipXmlSdkTests>
+                <skipTests>true</skipTests>
             </properties>
         </profile>
     </profiles>
