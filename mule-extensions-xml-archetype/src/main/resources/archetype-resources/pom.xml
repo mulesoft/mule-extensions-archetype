@@ -22,7 +22,7 @@
         <munit.output.directory>${basedir}/target/test-mule/munit</munit.output.directory>
 
         <maven.source.plugin.version>3.0.1</maven.source.plugin.version>
-        <maven.resources.plugin.version>3.1.0</maven.resources.plugin.version>
+        <maven.resources.plugin.version>3.3.1</maven.resources.plugin.version>
         <maven.clean.plugin.version>3.1.0</maven.clean.plugin.version>
         <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
         <maven.install.plugin.version>2.5.2</maven.install.plugin.version>
