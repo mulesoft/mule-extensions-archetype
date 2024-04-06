@@ -21,7 +21,7 @@ public class ArchetypeConstants {
 
   public static final String EXTENSIONS_ARCHETYPE_GID = "org.mule.extensions";
   public static final String EXTENSIONS_ARCHETYPE_AID = "mule-extensions-archetype";
-  public static final String EXTENSIONS_ARCHETYPE_VERSION = "1.3.0-SNAPSHOT";
+  public static final String EXTENSIONS_ARCHETYPE_VERSION = "1.3.0";
 
   public static final String EXTENSION_NAME = "extensionName";
   public static final String EXTENSION_NAME_NO_SPACES = "extensionNameNoSpaces";
