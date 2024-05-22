@@ -130,7 +130,7 @@
         <javaFormatter.plugin.version>2.14.0</javaFormatter.plugin.version>
         <maven.surefire.plugin.version>2.22.2</maven.surefire.plugin.version>
         <aspectjVersion>1.9.2</aspectjVersion>
-        <allureJunitVersion>2.8.1</allureJunitVersion>
+        <allureJunitVersion>2.27.0</allureJunitVersion>
         <allureReportVersion>2.8.1</allureReportVersion>
         <allure.maven.plugin.version>2.9</allure.maven.plugin.version>
         <jacoco.version>0.8.11</jacoco.version>
