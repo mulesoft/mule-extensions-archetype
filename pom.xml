@@ -3,6 +3,12 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
+    <parent>
+        <groupId>org.mule</groupId>
+        <artifactId>mule-plugin-mgmt-parent-pom</artifactId>
+        <version>4.8.0-SNAPSHOT</version>
+    </parent>
+
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.mule.extensions</groupId>
     <artifactId>mule-extensions-archetype-parent</artifactId>
@@ -122,23 +128,10 @@
     </modules>
 
     <properties>
-        <formatterConfigPath>formatter.xml</formatterConfigPath>
-        <formatterGoal>validate</formatterGoal>
-        <skipVerifications>false</skipVerifications>
         <jdk.version>1.8</jdk.version>
-        <mavenCompilerVersion>3.8.1</mavenCompilerVersion>
-        <javaFormatter.plugin.version>2.14.0</javaFormatter.plugin.version>
-        <maven.surefire.plugin.version>2.22.2</maven.surefire.plugin.version>
-        <aspectjVersion>1.9.2</aspectjVersion>
-        <allureJunitVersion>2.8.1</allureJunitVersion>
-        <allureReportVersion>2.8.1</allureReportVersion>
-        <allure.maven.plugin.version>2.9</allure.maven.plugin.version>
-        <jacoco.version>0.8.11</jacoco.version>
-        <maven.enforcer.plugin.version>1.4.1</maven.enforcer.plugin.version>
+
         <mule.extension.archetype.testSettings>${java.io.tmpdir}/effective-settings.xml</mule.extension.archetype.testSettings>
 
-        <mulesoftLicenseVersion>1.4.0</mulesoftLicenseVersion>
-        <license.maven.plugin.version>4.2</license.maven.plugin.version>
         <licensePath>LICENSE_HEADER_CPAL.txt</licensePath>
         <licenseYear>2023</licenseYear>
     </properties>
@@ -149,9 +142,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>${mavenCompilerVersion}</version>
                     <configuration>
-                        <encoding>ISO-8859-1</encoding>
                         <source>${jdk.version}</source>
                         <target>${jdk.version}</target>
                         <proc>none</proc>
@@ -161,7 +152,6 @@
                 <plugin>
                     <groupId>net.revelc.code.formatter</groupId>
                     <artifactId>formatter-maven-plugin</artifactId>
-                    <version>${javaFormatter.plugin.version}</version>
                     <configuration>
                         <compilerCompliance>${jdk.version}</compilerCompliance>
                         <compilerSource>${jdk.version}</compilerSource>
@@ -171,61 +161,14 @@
                         <aggregator>false</aggregator>
                         <executionRoot>true</executionRoot>
                     </configuration>
-                    <executions>
-                        <execution>
-                            <phase>compile</phase>
-                            <goals>
-                                <goal>${formatterGoal}</goal>
-                            </goals>
-                            <configuration>
-                                <skipFormatting>${skipVerifications}</skipFormatting>
-                            </configuration>
-                        </execution>
-                    </executions>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>${maven.surefire.plugin.version}</version>
                     <configuration>
-                        <argLine>-Dfile.encoding=UTF-8 -javaagent:${settings.localRepository}/org/aspectj/aspectjweaver/${aspectjVersion}/aspectjweaver-${aspectjVersion}.jar -javaagent:${settings.localRepository}/org/jacoco/org.jacoco.agent/${jacoco.version}/org.jacoco.agent-${jacoco.version}-runtime.jar=destfile='${session.executionRootDirectory}/target/jacoco.exec'</argLine>
-                        <properties>
-                            <property>
-                                <name>listener</name>
-                                <value>io.qameta.allure.junit4.AllureJunit4</value>
-                            </property>
-                        </properties>
-                        <systemProperties>
-                            <property>
-                                <name>allure.results.directory</name>
-                                <value>${project.build.directory}/allure-results</value>
-                            </property>
-                        </systemProperties>
                         <systemPropertyVariables>
                             <mule.extension.archetype.testSettings>${mule.extension.archetype.testSettings}</mule.extension.archetype.testSettings>
-                            <argLine>-javaagent:${settings.localRepository}/org/jacoco/org.jacoco.agent/${jacoco.version}/org.jacoco.agent-${jacoco.version}-runtime.jar=destfile=${session.executionRootDirectory}/target/jacoco-it.exec</argLine>
                         </systemPropertyVariables>
-                    </configuration>
-                    <dependencies>
-                        <dependency>
-                            <groupId>org.aspectj</groupId>
-                            <artifactId>aspectjweaver</artifactId>
-                            <version>${aspectjVersion}</version>
-                        </dependency>
-                        <dependency>
-                            <groupId>org.jacoco</groupId>
-                            <artifactId>org.jacoco.agent</artifactId>
-                            <version>${jacoco.version}</version>
-                            <classifier>runtime</classifier>
-                        </dependency>
-                    </dependencies>
-                </plugin>
-                <plugin>
-                    <groupId>io.qameta.allure</groupId>
-                    <artifactId>allure-maven</artifactId>
-                    <version>${allure.maven.plugin.version}</version>
-                    <configuration>
-                        <reportVersion>${allureReportVersion}</reportVersion>
                     </configuration>
                 </plugin>
             </plugins>
@@ -234,34 +177,12 @@
             <plugin>
                 <groupId>com.mycila</groupId>
                 <artifactId>license-maven-plugin</artifactId>
-                <version>${license.maven.plugin.version}</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>com.mulesoft.license</groupId>
-                        <artifactId>license</artifactId>
-                        <version>${mulesoftLicenseVersion}</version>
-                    </dependency>
-                </dependencies>
                 <configuration>
                     <header>${licensePath}</header>
                     <properties>
                         <year>${licenseYear}</year>
                     </properties>
-                    <includes>
-                        <include>**/*.java</include>
-                    </includes>
-                    <mapping>
-                        <java>SLASHSTAR_STYLE</java>
-                    </mapping>
                 </configuration>
-                <executions>
-                    <execution>
-                        <phase>compile</phase>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -291,7 +212,6 @@
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-junit4</artifactId>
-            <version>${allureJunitVersion}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -323,17 +243,6 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>attach-javadocs</id>
-                                <goals>
-                                    <goal>jar</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                        <configuration>
-                            <additionalparam>${xDocLint}</additionalparam>
-                        </configuration>
                     </plugin>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
@@ -350,7 +259,6 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <version>1.5</version>
                         <executions>
                             <execution>
                                 <id>sign-artifacts</id>
@@ -371,7 +279,6 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-enforcer-plugin</artifactId>
-                        <version>${maven.enforcer.plugin.version}</version>
                         <executions>
                             <execution>
                                 <id>enforce-no-snapshots-in-deps</id>

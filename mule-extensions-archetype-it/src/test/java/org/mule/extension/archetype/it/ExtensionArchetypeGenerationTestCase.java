@@ -37,9 +37,9 @@ import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.maven.it.VerificationException;
 import org.apache.maven.it.Verifier;
-import org.apache.tika.io.IOUtils;
 import org.skyscreamer.jsonassert.JSONAssert;
 
 import org.junit.Ignore;
