@@ -18,7 +18,7 @@
 
     <properties>
         <mavenVersion>3.3.9</mavenVersion>
-        <mavenPluginVersion>3.3</mavenPluginVersion>
+        <mavenPluginVersion>3.13.1</mavenPluginVersion>
         <mojoExecutorVersion>2.3.0</mojoExecutorVersion>
         <formatterConfigPath>../formatter.xml</formatterConfigPath>
         <commonsLangVersion>3.7</commonsLangVersion>
