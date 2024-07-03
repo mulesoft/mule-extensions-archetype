@@ -22,7 +22,7 @@
             <extension>
                 <groupId>org.apache.maven.archetype</groupId>
                 <artifactId>archetype-packaging</artifactId>
-                <version>3.0.1</version>
+                <version>${maven.archetype.plugin.version}</version>
             </extension>
         </extensions>
 
@@ -30,7 +30,6 @@
             <plugins>
                 <plugin>
                     <artifactId>maven-archetype-plugin</artifactId>
-                    <version>3.0.1</version>
                     <configuration>
                         <skip>${skipTests}</skip>
                         <settingsFile>${mule.extension.archetype.testSettings}</settingsFile>
