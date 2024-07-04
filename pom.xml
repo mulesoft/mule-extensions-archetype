@@ -130,6 +130,8 @@
     <properties>
         <jdk.version>1.8</jdk.version>
 
+        <muleBomVersion>4.8.0-SNAPSHOT</muleBomVersion>
+
         <mule.extension.archetype.testSettings>${java.io.tmpdir}/effective-settings.xml</mule.extension.archetype.testSettings>
 
         <licensePath>LICENSE_HEADER_CPAL.txt</licensePath>
@@ -207,6 +209,19 @@
             </plugin>
         </plugins>
     </build>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.mule</groupId>
+                <artifactId>mule-runtime-bom</artifactId>
+                <version>${muleBomVersion}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+    
     <dependencies>
         <dependency>
             <groupId>io.qameta.allure</groupId>
@@ -271,13 +286,7 @@
                     <plugin>
                         <groupId>org.sonatype.plugins</groupId>
                         <artifactId>nexus-staging-maven-plugin</artifactId>
-                        <version>1.6.7</version>
                         <extensions>true</extensions>
-                        <configuration>
-                            <serverId>sonatype-nexus-staging</serverId>
-                            <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                            <autoReleaseAfterClose>false</autoReleaseAfterClose>
-                        </configuration>
                     </plugin>
                 </plugins>
             </build>
