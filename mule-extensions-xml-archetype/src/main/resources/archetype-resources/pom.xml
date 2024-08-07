@@ -32,7 +32,7 @@
         <maven.surefire.plugin.version>2.22.2</maven.surefire.plugin.version>
 
         <log4jVersion>2.17.1</log4jVersion>
-        <disruptorVersion>3.4.2</disruptorVersion>
+        <disruptorVersion>3.4.4</disruptorVersion>
     </properties>
 
     <dependencyManagement>
