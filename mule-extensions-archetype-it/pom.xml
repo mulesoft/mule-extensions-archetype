@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.mule.extensions</groupId>
         <artifactId>mule-extensions-archetype-parent</artifactId>
-        <version>1.4.0-20240729</version>
+        <version>1.4.0-SNAPSHOT</version>
     </parent>
 
     <name>Mule Extensions Archetype Integration Tests</name>
