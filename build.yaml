@@ -1,9 +1,3 @@
 projectType: runtime
-jdkTool: OPEN-JDK11
-testJdkTool: OPEN-JDK8
-additionalTestConfigs:
-  jdk11:
-    testJdkTool: OPEN-JDK11
-# TODO W-14854013 reenable this version
-#  jdk17:
-#    testJdkTool: OPEN-JDK17
+jdkTool: OPEN-JDK17
+testJdkTool: OPEN-JDK17
