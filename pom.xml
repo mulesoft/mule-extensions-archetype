@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.mule</groupId>
         <artifactId>mule-plugin-mgmt-parent-pom</artifactId>
-        <version>4.8.0-SNAPSHOT</version>
+        <version>4.9.0-SNAPSHOT</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
@@ -130,7 +130,7 @@
     <properties>
         <jdk.version>1.8</jdk.version>
 
-        <muleBomVersion>4.8.0-SNAPSHOT</muleBomVersion>
+        <muleBomVersion>4.9.0-SNAPSHOT</muleBomVersion>
 
         <mule.extension.archetype.testSettings>${java.io.tmpdir}/effective-settings.xml</mule.extension.archetype.testSettings>
 
