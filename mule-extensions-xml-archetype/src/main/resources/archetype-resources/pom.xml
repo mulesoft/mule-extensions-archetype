@@ -12,7 +12,7 @@
 
 
     <properties>
-        <mule.version>4.8.2-SNAPSHOT</mule.version>
+        <mule.version>4.8.1-SNAPSHOT</mule.version>
         <mule.impl.version>4.8.1-SNAPSHOT</mule.impl.version>
         <mule.extensions.maven.plugin.version>1.8.1-SNAPSHOT</mule.extensions.maven.plugin.version>
 
