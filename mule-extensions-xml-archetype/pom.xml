@@ -18,6 +18,42 @@
     </properties>
 
     <build>
+        <plugins>
+            <plugin>
+                <groupId>com.google.code.maven-replacer-plugin</groupId>
+                <artifactId>replacer</artifactId>
+                <version>1.5.3</version>
+                <executions>
+                    <execution>
+                        <id>replace-exchange-pom</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>replace</goal>
+                        </goals>
+                        <configuration>
+                            <ignoreMissingFile>false</ignoreMissingFile>
+                            <basedir>${project.build.directory}/META-INF/mule-src/${project.artifactId}</basedir>
+                            <file>exchange-template-pom.xml</file>
+                            <replacements>
+                                <replacement>
+                                    <token>%GROUP_ID%</token>
+                                    <value>${exchange.groupId}</value>
+                                </replacement>
+                                <replacement>
+                                    <token>%ARTIFACT_ID%</token>
+                                    <value>${project.artifactId}</value>
+                                </replacement>
+                                <replacement>
+                                    <token>%VERSION%</token>
+                                    <value>${project.version}</value>
+                                </replacement>
+                            </replacements>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+
         <extensions>
             <extension>
                 <groupId>org.apache.maven.archetype</groupId>
