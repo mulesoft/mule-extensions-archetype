@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xmlns:module-basic="http://www.mulesoft.org/schema/mule/module-basic"
+      xmlns:basic="http://www.mulesoft.org/schema/mule/basic"
 
       xmlns:munit="http://www.mulesoft.org/schema/mule/munit"
       xmlns:munitext="http://www.mulesoft.org/schema/mule/munit-tools"
@@ -8,7 +8,7 @@
       xsi:schemaLocation="
         http://www.mulesoft.org/schema/mule/core      http://www.mulesoft.org/schema/mule/core/current/mule.xsd
         http://www.mulesoft.org/schema/mule/munit     http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
-        http://www.mulesoft.org/schema/mule/module-basic http://www.mulesoft.org/schema/mule/module-basic/current/mule-module-basic.xsd
+        http://www.mulesoft.org/schema/mule/basic http://www.mulesoft.org/schema/mule/basic/current/mule-basic.xsd
         http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
 
     <munit:config name="assertion-test.xml"/>
@@ -32,10 +32,10 @@
     </munit:test>
 
     <flow name="set-payload-hardcoded-flow">
-        <module-basic:set-payload-hardcoded/>
+        <basic:set-payload-hardcoded/>
     </flow>
 
     <flow name="set-payload-hardcoded-two-times-flow">
-        <module-basic:set-payload-hardcoded-two-times/>
+        <basic:set-payload-hardcoded-two-times/>
     </flow>
 </mule>

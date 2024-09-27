@@ -1,7 +1,7 @@
 #set( $symbol_pound = '#' )
 #set( $symbol_dollar = '$' )
 #set( $symbol_escape = '\' )
-#set( $hyphenated_module_name = "module-${extensionName.toLowerCase().replace(' ', '-')}" )
+#set( $hyphenated_module_name = "${extensionName.toLowerCase().replace(' ', '-')}" )
 <?xml version="1.0" encoding="UTF-8"?>
 <module name="${extensionName} Smart Connector"
         prefix="${hyphenated_module_name}"
