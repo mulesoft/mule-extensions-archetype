@@ -15,9 +15,53 @@
 
     <properties>
         <skipXmlSdkTests>false</skipXmlSdkTests>
+
+        <mule.version>4.9.0-SNAPSHOT</mule.version>
+        <mule.impl.version>${mule.version}</mule.impl.version>
+        <mule.extensions.maven.plugin.version>1.9.0-SNAPSHOT</mule.extensions.maven.plugin.version>
     </properties>
 
     <build>
+        <plugins>
+            <plugin>
+                <groupId>com.google.code.maven-replacer-plugin</groupId>
+                <artifactId>replacer</artifactId>
+                <version>1.5.3</version>
+                <executions>
+                    <execution>
+                        <id>replace-poms</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>replace</goal>
+                        </goals>
+                        <configuration>
+                            <ignoreMissingFile>false</ignoreMissingFile>
+                            <basedir>${project.build.directory}</basedir>
+                            <includes>
+                                <include>classes/archetype-resources/pom.xml</include>
+                                <include>test-classes/projects/basic/reference/pom.xml</include>
+                                <include>test-classes/projects/basic-with-spaces/reference/pom.xml</include>
+                            </includes>
+                            <replacements>
+                                <replacement>
+                                    <token>%MULE.VERSION%</token>
+                                    <value>${mule.version}</value>
+                                </replacement>
+                                <replacement>
+                                    <token>%MULE.IMPL.VERSION%</token>
+                                    <value>${mule.impl.version}</value>
+                                </replacement>
+                                <replacement>
+                                    <token>%MULE.EXTENSIONS.MAVEN.PLUGIN.VERSION%</token>
+                                    <value>${mule.extensions.maven.plugin.version}</value>
+                                </replacement>
+                            </replacements>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+
         <extensions>
             <extension>
                 <groupId>org.apache.maven.archetype</groupId>
