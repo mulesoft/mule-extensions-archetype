@@ -19,6 +19,8 @@
 
     <properties>
         <formatterConfigPath>../formatter.xml</formatterConfigPath>
+
+        <mule.modules.parent.version>1.9.0-SNAPSHOT</mule.modules.parent.version>
     </properties>
 
     <build>
@@ -29,6 +31,34 @@
                 <configuration>
                     <includeEmptyDirs>true</includeEmptyDirs>
                 </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>com.google.code.maven-replacer-plugin</groupId>
+                <artifactId>replacer</artifactId>
+                <version>1.5.3</version>
+                <executions>
+                    <execution>
+                        <id>replace-poms</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>replace</goal>
+                        </goals>
+                        <configuration>
+                            <ignoreMissingFile>false</ignoreMissingFile>
+                            <basedir>${project.build.directory}</basedir>
+                            <includes>
+                                <include>classes/archetype-resources/pom.xml</include>
+                            </includes>
+                            <replacements>
+                                <replacement>
+                                    <token>%MULE.MODULES.PARENT.VERSION%</token>
+                                    <value>${mule.modules.parent.version}</value>
+                                </replacement>
+                            </replacements>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
