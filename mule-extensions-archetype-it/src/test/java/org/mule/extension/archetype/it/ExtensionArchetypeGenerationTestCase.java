@@ -97,9 +97,9 @@ public class ExtensionArchetypeGenerationTestCase {
     // Since creating the archetype was successful, we now want to actually build the generated project
     verifier = new Verifier(ROOT.getAbsolutePath() + "/" + artifactId);
 
-    Optional<String> mavenSettingsFile = getMavenSettingsFile();
+    final Optional<String> mavenSettingsFile = getMavenSettingsFile();
     if (mavenSettingsFile.isPresent() && new File(mavenSettingsFile.get()).exists()) {
-      List cliProps = new ArrayList<String>();
+      final List cliProps = new ArrayList<String>();
       cliProps.add("-s " + mavenSettingsFile.get());
       verifier.setCliOptions(cliProps);
     }
@@ -109,19 +109,19 @@ public class ExtensionArchetypeGenerationTestCase {
     verifier.setMavenDebug(true);
     verifier.executeGoals(asList("package"), getEnvVars());
     verifier.verifyErrorFreeLog();
-    Optional<String> extensionName = Optional.ofNullable(pluginProperties.getProperty(EXTENSION_NAME));
+    final Optional<String> extensionName = Optional.ofNullable(pluginProperties.getProperty(EXTENSION_NAME));
     verifyExtensionModel(extensionName.orElse(TEST_EXTENSION_NAME), artifactId);
   }
 
   private void verifyExtensionModel(String extensionName, String artifactId) throws Exception {
-    String normalizedExtensionName = extensionName.toLowerCase().replace(" ", "-");
-    String actualExtensionModel = getActualExtensionModel(artifactId);
-    String expectedExtensionModel = getExpectedExtensionModel(normalizedExtensionName) ;
+    final String normalizedExtensionName = extensionName.toLowerCase().replace(" ", "-");
+    final String actualExtensionModel = getActualExtensionModel(artifactId);
+    final String expectedExtensionModel = getExpectedExtensionModel(normalizedExtensionName) ;
     JSONAssert.assertEquals(expectedExtensionModel, actualExtensionModel,true);
   }
 
   private String getExpectedExtensionModel(String extensionName) throws Exception {
-    InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream(extensionName+".json");
+    final InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream(extensionName+".json");
     return IOUtils.toString(is);
    }
 
@@ -147,7 +147,7 @@ public class ExtensionArchetypeGenerationTestCase {
   }
 
   private static Properties getAllProperties(String extensionName, String extensionNameNoSpaces) {
-    Properties props = getPluginProperties();
+    final Properties props = getPluginProperties();
 
     // Extensions archetype properties
     props.put(EXTENSION_NAME, extensionName);
@@ -161,7 +161,7 @@ public class ExtensionArchetypeGenerationTestCase {
   }
 
   private static Properties getPluginProperties() {
-    Properties props = new Properties();
+    final Properties props = new Properties();
 
     // Archetype plugin properties
     props.put(ARCHETYPE_GID_PROP, EXTENSIONS_ARCHETYPE_GID);
@@ -173,7 +173,7 @@ public class ExtensionArchetypeGenerationTestCase {
   }
 
   private static Properties getEnvVars() {
-    Properties vars = new Properties();
+    final Properties vars = new Properties();
 
     vars.put("MAVEN_OPTS", MAVEN_OPTS);
     vars.put(JAVA_HOME, getenv(JAVA_HOME));
@@ -183,7 +183,7 @@ public class ExtensionArchetypeGenerationTestCase {
 
   private Optional<String> getMavenSettingsFile() {
     Optional<String> mavenSettingsFile = Optional.ofNullable(getProperty(MAVEN_SETTINGS_PROPERTY));
-    Pattern pattern = Pattern.compile("\\$\\{(.*)\\}");
+    final Pattern pattern = Pattern.compile("\\$\\{(.*)\\}");
     Matcher matcher = pattern.matcher(mavenSettingsFile.orElse(""));
 
     while (matcher.find()) {
