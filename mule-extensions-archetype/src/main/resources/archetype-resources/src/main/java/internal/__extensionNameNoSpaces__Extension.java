@@ -7,8 +7,13 @@
 package ${package}.internal;
 
 import org.mule.runtime.extension.api.annotation.Extension;
+
+import static org.mule.sdk.api.meta.JavaVersion.JAVA_17;
+import static org.mule.sdk.api.meta.JavaVersion.JAVA_21;
+
 import org.mule.runtime.extension.api.annotation.Configurations;
 import org.mule.runtime.extension.api.annotation.dsl.xml.Xml;
+import org.mule.sdk.api.annotation.JavaVersionSupport;
 
 
 /**
@@ -19,6 +24,7 @@ import org.mule.runtime.extension.api.annotation.dsl.xml.Xml;
 @Xml(prefix = "${xsdName}")
 @Extension(name = "${extensionName}")
 @Configurations(${extensionNameNoSpaces}Configuration.class)
+@JavaVersionSupport({JAVA_17, JAVA_21})
 public class ${extensionNameNoSpaces}Extension {
 
 }

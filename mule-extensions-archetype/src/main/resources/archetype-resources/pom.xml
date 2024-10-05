@@ -16,4 +16,8 @@
         <version>%MULE.MODULES.PARENT.VERSION%</version>
     </parent>
 
+    <properties>
+        <java.release.version>17</java.release.version>
+    </properties>
+
 </project>
