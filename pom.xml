@@ -131,7 +131,7 @@
     <properties>
         <jdk.version>17</jdk.version>
 
-        <muleBomVersion>4.9.0-SNAPSHOT</muleBomVersion>
+        <muleBomVersion>4.9.0-20241025</muleBomVersion>
 
         <mule.extension.archetype.testSettings>${java.io.tmpdir}/effective-settings.xml</mule.extension.archetype.testSettings>
 
