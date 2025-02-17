@@ -20,7 +20,7 @@
     <properties>
         <formatterConfigPath>../formatter.xml</formatterConfigPath>
 
-        <mule.modules.parent.version>1.9.1-SNAPSHOT</mule.modules.parent.version>
+        <mule.modules.parent.version>1.9.2-SNAPSHOT</mule.modules.parent.version>
     </properties>
 
     <build>

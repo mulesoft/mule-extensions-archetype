@@ -16,9 +16,9 @@
     <properties>
         <skipXmlSdkTests>false</skipXmlSdkTests>
 
-        <mule.version>4.9.1-SNAPSHOT</mule.version>
+        <mule.version>4.9.2-SNAPSHOT</mule.version>
         <mule.impl.version>${mule.version}</mule.impl.version>
-        <mule.extensions.maven.plugin.version>1.9.1-SNAPSHOT</mule.extensions.maven.plugin.version>
+        <mule.extensions.maven.plugin.version>1.9.2-SNAPSHOT</mule.extensions.maven.plugin.version>
     </properties>
 
     <build>
