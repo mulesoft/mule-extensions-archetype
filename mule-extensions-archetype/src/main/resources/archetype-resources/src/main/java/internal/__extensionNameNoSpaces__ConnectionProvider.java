@@ -20,7 +20,7 @@ import org.slf4j.LoggerFactory;
 
 
 /**
- * This class (as it's name implies) provides connection instances and the funcionality to disconnect and validate those
+ * This class (as it's name implies) provides connection instances and the functionality to disconnect and validate those
  * connections.
  * <p>
  * All connection related parameters (values required in order to create a connection) must be
