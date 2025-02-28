@@ -111,27 +111,26 @@ public class ExtensionArchetypeGeneratorMojo extends AbstractMojo {
     session.getUserProperties().setProperty(EXTENSION_NAME_NO_SPACES, withNoSpaces(normalizedExtensionName));
 
     executeMojo(
-      plugin(groupId("org.apache.maven.plugins"), artifactId("maven-archetype-plugin"), version("3.0.1")),
-      goal("generate"),
-      configuration(
-          element(name(ARCHETYPE_GID_PROP), EXTENSIONS_ARCHETYPE_GID),
-          element(name(ARCHETYPE_AID_PROP), EXTENSIONS_ARCHETYPE_AID),
-          element(name(ARCHETYPE_VERSION_PROP), EXTENSIONS_ARCHETYPE_VERSION),
-          element(name(ARCHETYPE_INTERACTIVE_MODE_PROP), FALSE.toString())
-      ),
-      executionEnvironment(
-        project,
-        session,
-        pluginManager
-      )
-    );
+                plugin(groupId("org.apache.maven.plugins"), artifactId("maven-archetype-plugin"), version("3.0.1")),
+                goal("generate"),
+                configuration(
+                              element(name(ARCHETYPE_GID_PROP), EXTENSIONS_ARCHETYPE_GID),
+                              element(name(ARCHETYPE_AID_PROP), EXTENSIONS_ARCHETYPE_AID),
+                              element(name(ARCHETYPE_VERSION_PROP), EXTENSIONS_ARCHETYPE_VERSION),
+                              element(name(ARCHETYPE_INTERACTIVE_MODE_PROP), FALSE.toString())),
+                executionEnvironment(
+                                     project,
+                                     session,
+                                     pluginManager));
   }
+
   private String normalizeName(String extensionName) {
     return extensionName.replaceAll("(?i)extension", "").replaceAll("(?i)connector", "").trim();
   }
 
   private String withNoSpaces(String extensionName) {
-    return extensionName.replace("-", " ").replace(" ", "").replaceAll("(?i)extension", "").replaceAll("(?i)connector", "").trim();
+    return extensionName.replace("-", " ").replace(" ", "").replaceAll("(?i)extension", "").replaceAll("(?i)connector", "")
+        .trim();
   }
 
   private void debugValue(String name, String value) {
