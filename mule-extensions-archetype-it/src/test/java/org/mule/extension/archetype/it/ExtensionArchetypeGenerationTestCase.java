@@ -49,7 +49,8 @@ import org.junit.Test;
 public class ExtensionArchetypeGenerationTestCase {
 
   private static final File ROOT = new File("target/test-classes/");
-  private static final String TEMPORAL_EXTENSION_MODEL_PATH_TEMPLATE = ROOT.getAbsolutePath() +"/%s/target/temporal-extension-model.json";
+  private static final String TEMPORAL_EXTENSION_MODEL_PATH_TEMPLATE =
+      ROOT.getAbsolutePath() + "/%s/target/temporal-extension-model.json";
 
   private static final String JAVA_HOME = "JAVA_HOME";
   private static final String TEST_EXTENSION_NAME = "Basic";
@@ -70,12 +71,14 @@ public class ExtensionArchetypeGenerationTestCase {
 
   @Test
   public void generateWithNameWithSpaces() throws Exception {
-    generate(TEST_EXTENSION_GID, TEST_EXTENSION_AID, TEST_EXTENSION_VERSION, getAllProperties("Basic Pepe Extension", "BasicPepeExtension"));
+    generate(TEST_EXTENSION_GID, TEST_EXTENSION_AID, TEST_EXTENSION_VERSION,
+             getAllProperties("Basic Pepe Extension", "BasicPepeExtension"));
   }
 
   @Test
   public void generateWithNameWithHyphens() throws Exception {
-    generate(TEST_EXTENSION_GID, TEST_EXTENSION_AID, TEST_EXTENSION_VERSION, getAllProperties("my-pepe-extension", "MyPepeExtension"));
+    generate(TEST_EXTENSION_GID, TEST_EXTENSION_AID, TEST_EXTENSION_VERSION,
+             getAllProperties("my-pepe-extension", "MyPepeExtension"));
   }
 
   @Test
@@ -116,26 +119,23 @@ public class ExtensionArchetypeGenerationTestCase {
   private void verifyExtensionModel(String extensionName, String artifactId) throws Exception {
     final String normalizedExtensionName = extensionName.toLowerCase().replace(" ", "-");
     final String actualExtensionModel = getActualExtensionModel(artifactId);
-    final String expectedExtensionModel = getExpectedExtensionModel(normalizedExtensionName) ;
-    JSONAssert.assertEquals(expectedExtensionModel, actualExtensionModel,true);
+    final String expectedExtensionModel = getExpectedExtensionModel(normalizedExtensionName);
+    JSONAssert.assertEquals(expectedExtensionModel, actualExtensionModel, true);
   }
 
   private String getExpectedExtensionModel(String extensionName) throws Exception {
-    final InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream(extensionName+".json");
+    final InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream(extensionName + ".json");
     return IOUtils.toString(is);
-   }
+  }
 
-  private String getActualExtensionModel(String artifactId) throws Exception{
+  private String getActualExtensionModel(String artifactId) throws Exception {
     return readFileToString(new File(String.format(TEMPORAL_EXTENSION_MODEL_PATH_TEMPLATE, artifactId)));
   }
 
   private void clean(String groupId, String artifactId, String version) throws VerificationException, IOException {
     /*
-     * We must first make sure that any artifact created
-     * by this test has been removed from the local
-     * repository. Failing to do this could cause
-     * unstable test results. Fortunately, the verifier
-     * makes it easy to do this.
+     * We must first make sure that any artifact created by this test has been removed from the local repository. Failing to do
+     * this could cause unstable test results. Fortunately, the verifier makes it easy to do this.
      */
     verifier = new Verifier(ROOT.getAbsolutePath());
 
