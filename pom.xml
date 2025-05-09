@@ -159,10 +159,6 @@
                         <compilerCompliance>${jdk.version}</compilerCompliance>
                         <compilerSource>${jdk.version}</compilerSource>
                         <compilerTargetPlatform>${jdk.version}</compilerTargetPlatform>
-                        <configFile>${basedir}/${formatterConfigPath}</configFile>
-                        <configJsFile>${basedir}/${formatterConfigPath}</configJsFile>
-                        <aggregator>false</aggregator>
-                        <executionRoot>true</executionRoot>
                     </configuration>
                 </plugin>
                 <plugin>
