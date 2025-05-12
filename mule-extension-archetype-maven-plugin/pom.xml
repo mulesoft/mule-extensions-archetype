@@ -16,10 +16,6 @@
     <artifactId>mule-extensions-archetype-maven-plugin</artifactId>
     <packaging>maven-plugin</packaging>
 
-    <properties>
-        <formatterConfigPath>../formatter.xml</formatterConfigPath>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>org.apache.maven.plugin-tools</groupId>
