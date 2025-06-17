@@ -33,3 +33,6 @@ hostkey.ser
 
 # Manifest
 src/main/resources/META-INF/MANIFEST.MF
+
+# Allure
+.allure
